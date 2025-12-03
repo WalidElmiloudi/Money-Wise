@@ -1,12 +1,4 @@
-<?php
 
-    $host     = "localhost";
-    $user     = "root";
-    $password = "";
-    $db       = "smart_wallet";
-
-    $conn = new mysqli($host, $user, $password, $db);
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet">
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-chubby/css/uicons-regular-chubby.css'>
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-chubby/css/uicons-solid-chubby.css'>
 </head>
 
@@ -53,17 +46,34 @@
         <h1 class=" text-4xl font-bold text-[#041368]"><a href="expences.php">Expences</a></h1>
       <h1 class=" text-4xl font-bold text-[#041368]"><a href="account.php">Account</a></h1>
     </div>
-    <div class="w-full h-full xl:py-1">
+    <div class="w-full h-full xl:py-1 overflow-hidden">
       <h1 class="text-4xl font-bold text-[#041368] pl-5 xl:hidden">Incomes</h1>
       <div class="w-full h-full flex flex-col items-center gap-4">
-        <div class="w-[90%] h-[80%] xl:h-[90%] bg-slate-100 rounded-md xl:order-2 flex flex-col items-center py-2 gap-2">
-          <div class="w-[90%] h-20 bg-white rounded-md">
-            <div class="flex flex-col justify-center">
-              <h1 class="text-[#041368] text-xl">10.00$</h1>
-              <h2 class="text-[#041368]">2023-12-03</h2>
+        <div class="w-[90%] h-[80%] xl:h-[90%] bg-slate-100 rounded-md xl:order-2 flex flex-col items-center py-2 gap-2 overflow-scroll [scroll-bar:none]">
+          <?php
+
+              $host     = "localhost";
+              $user     = "root";
+              $password = "";
+              $db       = "smart_wallet";
+
+              $conn   = new mysqli($host, $user, $password, $db);
+              $result = $conn->query("SELECT * FROM incomes");
+              if ($result->num_rows > 0) {
+                  while ($income = $result->fetch_assoc()) {
+                      echo "<div class='w-[90%] h-20 bg-white rounded-md flex flex-row justify-between px-1'>
+            <div class='h-full flex flex-col justify-center items-start px-2'>
+              <h1 class='text-[#041368] text-2xl font-bold'>" . $income['montant'] . "$</h1>
+              <h2 class='text-[#041368] text-xl'>" . $income['date'] . "</h2>
             </div>
-              
-          </div>
+              <div class='flex flex-col justify-center h-full gap-1'>
+                <a href='delete.php?id=" . $income['id'] . "&target=incomes'><button class='bg-red-500 py-1 px-2 text-white font-bold text-xl rounded-md'><i class='fi fi-rc-trash'></i></button></a>
+                <button class='bg-green-500 py-1 px-2 text-white font-bold text-xl rounded-md'><i class='fi fi-sc-pencil'></i></button>
+              </div>
+          </div>";
+                  }
+              }
+          ?>
         </div>
         <button id="addIncome" class="py-1 px-2 text-white font-bold text-xl bg-blue-500 rounded-md xl:order-1 xl:text-2xl cursor-pointer">Add an
           income</button>

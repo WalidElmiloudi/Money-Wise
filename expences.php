@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet">
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-chubby/css/uicons-regular-chubby.css'>
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-chubby/css/uicons-solid-chubby.css'>
 </head>
 
@@ -44,11 +45,34 @@
         <h1 class=" text-4xl font-bold text-[#041368]"><a href="#">Expences</a></h1>
       <h1 class=" text-4xl font-bold text-[#041368]"><a href="account.php">Account</a></h1>
     </div>
-    <div class="w-full h-full xl:py-1">
+    <div class="w-full h-full xl:py-1 overflow-hidden">
       <h1 class="text-4xl font-bold text-[#041368] pl-5 xl:hidden">Expences</h1>
       <div class="w-full h-full flex flex-col items-center gap-4">
-        <div class="w-[90%] h-[80%] xl:h-[90%] bg-slate-100 rounded-md xl:order-2">
+        <div class="w-[90%] h-[80%] xl:h-[90%] bg-slate-100 rounded-md xl:order-2 flex flex-col items-center py-2 gap-2 overflow-scroll [scroll-bar:none]">
+  <?php
 
+      $host     = "localhost";
+      $user     = "root";
+      $password = "";
+      $db       = "smart_wallet";
+
+      $conn   = new mysqli($host, $user, $password, $db);
+      $result = $conn->query("SELECT * FROM expences");
+      if ($result->num_rows > 0) {
+          while ($expence = $result->fetch_assoc()) {
+              echo "<div class='w-[90%] h-20 bg-white rounded-md flex flex-row justify-between px-1'>
+            <div class='h-full flex flex-col justify-center items-start px-2'>
+              <h1 class='text-[#041368] text-2xl font-bold'>" . $expence['montant'] . "$</h1>
+              <h2 class='text-[#041368] text-xl'>" . $expence['date'] . "</h2>
+            </div>
+              <div class='flex flex-col justify-center h-full gap-1'>
+                <a href='delete.php?id=" . $expence['id'] . "&target=expences'><button class='bg-red-500 py-1 px-2 text-white font-bold text-xl rounded-md'><i class='fi fi-rc-trash'></i></button></a>
+                <button class='bg-green-500 py-1 px-2 text-white font-bold text-xl rounded-md'><i class='fi fi-sc-pencil'></i></button>
+              </div>
+          </div>";
+          }
+      }
+  ?>
         </div>
         <button id="addExpenceBtn" class="px-2 py-1 text-white font-bold text-xl bg-red-500 rounded-md xl:order-1 xl:text-2xl cursor-pointer">Add an
           expence</button>
@@ -59,7 +83,7 @@
       aria-hidden="true">
       <div
         class="w-[80%] h-[60%] xl:w-[50%] 2xl:w-[40%] bg-slate-100 rounded-md shadow-xl flex items-center justify-center relative">
-        <form class="flex flex-col w-full h-full items-center justify-center gap-3 2xl:gap-5" action="" method="post">
+        <form class="flex flex-col w-full h-full items-center justify-center gap-3 2xl:gap-5" action="expenceHandler.php" method="post">
           <label for="amount" class="text-xl font-bold text-[#041368] self-start pl-8 xl:pl-16 2xl:pl-20">Amount
             :</label>
           <input class="py-2 pl-2 w-[80%] bg-white rounded-md" type="number" name="amount" id="amount" step="0.01"
@@ -106,7 +130,7 @@
       aria-hidden="true">
       <div
         class="w-[80%] h-[60%] xl:w-[50%] 2xl:w-[40%] bg-slate-100 rounded-md shadow-xl flex items-center justify-center relative">
-        <form class="flex flex-col w-full h-full items-center justify-center gap-3 2xl:gap-5" action="" method="post">
+        <form class="flex flex-col w-full h-full items-center justify-center gap-3 2xl:gap-5" action="expenceHandler.php" method="post">
           <label for="amount" class="text-xl font-bold text-[#041368] self-start pl-8 xl:pl-16 2xl:pl-20">Amount
             :</label>
           <input class="py-2 pl-2 w-[80%] bg-white rounded-md" type="number" name="amount" id="amount" step="0.01"

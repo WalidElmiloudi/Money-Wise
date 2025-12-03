@@ -11,8 +11,8 @@ $amount = $_POST['amount'];
 $type = $_POST['category'];
 $description = $_POST['description'];
 
-$conn->query("INSERT INTO incomes (montant,description,category) VALUES ('$amount','$description','$type')");
+$conn->query("INSERT INTO expences (montant,description,category) VALUES ('$amount','$description','$type')");
 
-header("Location: incomes.php");
+header("Location: expences.php");
 exit;
 ?>
