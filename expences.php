@@ -48,7 +48,7 @@
     <div class="w-full h-full xl:py-1 overflow-hidden">
       <h1 class="text-4xl font-bold text-[#041368] pl-5 xl:hidden">Expences</h1>
       <div class="w-full h-full flex flex-col items-center gap-4">
-        <div class="w-[90%] h-[80%] xl:h-[90%] bg-slate-100 rounded-md xl:order-2 flex flex-col items-center py-2 gap-2 overflow-scroll [scroll-bar:none]">
+        <div class="w-90 h-160 xl:h-[90%] xl:w-[80%] bg-slate-100 rounded-md xl:order-2 flex flex-col items-center py-2 gap-2 overflow-scroll [scrollbar-width:none]">
   <?php
 
       $host     = "localhost";
@@ -71,6 +71,8 @@
               </div>
           </div>";
           }
+      } else{
+        echo "<h1 class='text-xl font-bold text-[#041368]'>You have no expences !</h1>";
       }
   ?>
         </div>

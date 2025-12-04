@@ -38,7 +38,7 @@
       </div>
     </div>
   </section>
-  <main id="incomes" class="w-full h-full flex flex-col xl:flex-row gap-4" aria-hidden="true">
+  <main class="w-full h-full flex flex-col xl:flex-row gap-4">
     <div class="hidden w-[30%] bg-slate-300 h-full xl:flex flex-col justify-center gap-20 pl-10">
       <h1 class=" text-4xl font-bold text-[#041368]"><a href="home.php">Home</a></h1>
         <h1 class=" text-4xl font-bold text-[#041368]"><a href="dashboard.php">Dashboard</a></h1>
@@ -49,7 +49,7 @@
     <div class="w-full h-full xl:py-1 overflow-hidden">
       <h1 class="text-4xl font-bold text-[#041368] pl-5 xl:hidden">Incomes</h1>
       <div class="w-full h-full flex flex-col items-center gap-4">
-        <div class="w-[90%] h-[80%] xl:h-[90%] bg-slate-100 rounded-md xl:order-2 flex flex-col items-center py-2 gap-2 overflow-scroll [scroll-bar:none]">
+        <div class="w-90 h-160 xl:h-[90%] xl:w-[80%] bg-slate-100 rounded-md xl:order-2 flex flex-col items-center py-2 gap-2 overflow-scroll [scrollbar-width:none]">
           <?php
 
               $host     = "localhost";
@@ -58,22 +58,34 @@
               $db       = "smart_wallet";
 
               $conn   = new mysqli($host, $user, $password, $db);
+              $id     = 0;
               $result = $conn->query("SELECT * FROM incomes");
               if ($result->num_rows > 0) {
                   while ($income = $result->fetch_assoc()) {
-                      echo "<div class='w-[90%] h-20 bg-white rounded-md flex flex-row justify-between px-1'>
-            <div class='h-full flex flex-col justify-center items-start px-2'>
-              <h1 class='text-[#041368] text-2xl font-bold'>" . $income['montant'] . "$</h1>
-              <h2 class='text-[#041368] text-xl'>" . $income['date'] . "</h2>
-            </div>
-              <div class='flex flex-col justify-center h-full gap-1'>
-                <a href='delete.php?id=" . $income['id'] . "&target=incomes'><button class='bg-red-500 py-1 px-2 text-white font-bold text-xl rounded-md'><i class='fi fi-rc-trash'></i></button></a>
-                <button class='bg-green-500 py-1 px-2 text-white font-bold text-xl rounded-md'><i class='fi fi-sc-pencil'></i></button>
-              </div>
-          </div>";
-                  }
-              }
-          ?>
+                      $id = $income['id'];
+                  ?>
+<div class="w-[90%] h-20 bg-white rounded-md flex flex-row justify-between px-1">
+    <div class="h-full flex flex-col justify-center items-start px-2">
+        <h1 class="text-[#041368] text-2xl font-bold"><?php echo $income['montant'] ?>$</h1>
+        <h2 class="text-[#041368] text-xl"><?php echo $income['date'] ?></h2>
+    </div>
+
+    <div class="flex flex-col justify-center h-full gap-1">
+        <button id="btn" onclick="deleteModal(<?php echo $id?>,'incomes')"
+            class="bg-red-500 py-1 px-2 text-white font-bold text-xl rounded-md cursor-pointer"
+            table-name="incomes">
+            <i class="fi fi-rc-trash"></i>
+        </button>
+
+        <button class="bg-green-500 py-1 px-2 text-white font-bold text-xl rounded-md cursor-pointer">
+            <i class="fi fi-sc-pencil"></i>
+        </button>
+    </div>
+</div>
+
+                 <?php }
+                     }
+                 ?>
         </div>
         <button id="addIncome" class="py-1 px-2 text-white font-bold text-xl bg-blue-500 rounded-md xl:order-1 xl:text-2xl cursor-pointer">Add an
           income</button>
@@ -170,17 +182,7 @@
         class="w-10 h-10 bg-red-500 text-white text-xl font-bold rounded-full absolute -top-2 -right-2 xl:text-2xl">X</button>
     </div>
   </section>
-  <section id="delete"
-      class="fixed w-full h-full bg-black/20 backdrop-filter backdrop-blur-xs hidden justify-center items-center"
-      aria-hidden="">
-      <div class="w-70 h-50 bg-slate-100 rounded-md flex flex-col items-center justify-center gap-4">
-        <p class="text-3xl font-bold text-[#041368]">Are you sure ?</p>
-        <div class=" w-50 flex justify-between items-center">
-          <button class="py-1 px-2 rounded-md bg-green-400 text-white text-2xl font-bold">Cancel</button>
-          <button class="py-1 px-2 rounded-md bg-red-500 text-white text-2xl font-bold">Delete</button>
-        </div>
-      </div>
-    </section>
   </main>
   <script src="script.js"></script>
 </body>
+</html>
