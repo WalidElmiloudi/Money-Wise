@@ -140,3 +140,4 @@ function editModal(id,amount,description,table){
     </div>`;
   main.appendChild(newSection);
 }
+
