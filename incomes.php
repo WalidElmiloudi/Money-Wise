@@ -1,4 +1,8 @@
+<?php
 
+require 'config.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +37,6 @@
       <div class="w-full h-full flex flex-col justify-center gap-20 pl-10 -mt-5">
         <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="home.php">Home</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="dashboard.php">Dashboard</a></h1>
-        <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="#">Incomes</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="expences.php">Expences</a></h1>
       </div>
     </div>
@@ -51,13 +54,6 @@
       <div class="w-full h-full  flex flex-col items-center gap-4">
         <div class="w-90 h-160 xl:h-[90%] xl:w-[80%] bg-slate-50 rounded-md xl:order-2 flex flex-col items-center py-2 gap-2 overflow-scroll [scrollbar-width:none]">
           <?php
-
-              $host     = "localhost";
-              $user     = "root";
-              $password = "";
-              $db       = "smart_wallet";
-
-              $conn   = new mysqli($host, $user, $password, $db);
               $id     = 0;
               $result = $conn->query("SELECT * FROM incomes");
               if ($result->num_rows > 0) {

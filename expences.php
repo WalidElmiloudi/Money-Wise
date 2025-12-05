@@ -33,7 +33,6 @@
         <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="home.php">Home</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="dashboard.php">Dashboard</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="incomes.php">Incomes</a></h1>
-        <h1 class="text-4xl font-bold text-[#021c3b]"><a href="#">Expences</a></h1>
       </div>
     </div>
   </section>

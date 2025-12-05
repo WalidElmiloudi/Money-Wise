@@ -1,3 +1,8 @@
+<?php
+require 'config.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,12 +58,11 @@
   <section id="menu"
     class="fixed w-full h-full overlay bg-black/20 backdrop-filter backdrop-blur-xs shadow-lg hidden flex-col"
     aria-hidden="true">
-    <div class="w-[80%] h-screen bg-slate-400 pt-3">
+    <div class="w-[80%] h-screen bg-white pt-3">
       <div class="w-full flex justify-end pr-3">
         <i id="closeMenu" class="fi fi-br-cross text-3xl text-[#021c3b]"></i>
       </div>
       <div class="w-full h-full flex flex-col justify-center gap-20 pl-10 -mt-5">
-        <h1 class="homeRedirect text-4xl font-bold text-[#021c3b]"><a href="#">Home</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="dashboard.php">Dashboard</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="incomes.php">Incomes</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="expences.php">Expences</a></h1>
