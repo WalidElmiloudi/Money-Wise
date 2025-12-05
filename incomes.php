@@ -16,40 +16,40 @@
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-chubby/css/uicons-solid-chubby.css'>
 </head>
 
-<body class="w-full h-screen flex flex-col bg-slate-200 font-['open_sans']">
+<body class="w-full h-screen flex flex-col bg-slate-100 font-['open_sans']">
   <header class=" w-full justify-between px-3 h-15 flex items-center xl:hidden">
-    <i id="menuBg" class="fi fi-br-menu-burger text-3xl text-[#041368]"></i>
-    <div class="w-8 h-8 border-2 border-[#041368] flex justify-center items-center rounded-full">
-      <a href="account.php"><i class="fi fi-sc-user text-xl text-[#041368]"></i></a>
+    <i id="menuBg" class="fi fi-br-menu-burger text-3xl text-[#021c3b]"></i>
+    <div class="w-8 h-8 border-2 border-[#021c3b] flex justify-center items-center rounded-full">
+     <a href="account.php"><i class="fi fi-sc-user text-xl text-[#021c3b]"></i></a>
     </div>
   </header>
   <section id="menu"
     class="fixed w-full h-full overlay bg-black/20 backdrop-filter backdrop-blur-xs shadow-lg hidden flex-col"
     aria-hidden="true">
-    <div class="w-[80%] h-screen bg-slate-400 pt-3">
+    <div class="w-[80%] h-screen bg-white pt-3">
       <div class="w-full flex justify-end pr-3">
-        <i id="closeMenu" class="fi fi-br-cross text-3xl text-[#041368]"></i>
+        <i id="closeMenu" class="fi fi-br-cross text-3xl text-[#021c3b]"></i>
       </div>
       <div class="w-full h-full flex flex-col justify-center gap-20 pl-10 -mt-5">
-        <h1 class=" text-4xl font-bold text-[#041368]"><a href="home.php">Home</a></h1>
-        <h1 class=" text-4xl font-bold text-[#041368]"><a href="dashboard.php">Dashboard</a></h1>
-        <h1 class=" text-4xl font-bold text-[#041368]"><a href="#">Incomes</a></h1>
-        <h1 class=" text-4xl font-bold text-[#041368]"><a href="expences.php">Expences</a></h1>
+        <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="home.php">Home</a></h1>
+        <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="dashboard.php">Dashboard</a></h1>
+        <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="#">Incomes</a></h1>
+        <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="expences.php">Expences</a></h1>
       </div>
     </div>
   </section>
   <main class="w-full h-full flex flex-col xl:flex-row gap-4">
-    <div class="hidden w-[30%] bg-slate-300 h-full xl:flex flex-col justify-center gap-20 pl-10">
-      <h1 class=" text-4xl font-bold text-[#041368]"><a href="home.php">Home</a></h1>
-        <h1 class=" text-4xl font-bold text-[#041368]"><a href="dashboard.php">Dashboard</a></h1>
-        <h1 class=" text-4xl font-bold text-[#041368]"><a href="#">Incomes</a></h1>
-        <h1 class=" text-4xl font-bold text-[#041368]"><a href="expences.php">Expences</a></h1>
-      <h1 class=" text-4xl font-bold text-[#041368]"><a href="account.php">Account</a></h1>
+    <div class="hidden w-[30%] bg-white h-full xl:flex flex-col justify-center gap-20 pl-10">
+      <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="home.php">Home</a></h1>
+        <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="dashboard.php">Dashboard</a></h1>
+        <h1 class=" text-4xl font-bold rounded-full py-2 px-4 w-fit bg-gray-800 text-white"><a href="#">Incomes</a></h1>
+        <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="expences.php">Expences</a></h1>
+      <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="account.php">Account</a></h1>
     </div>
     <div class="w-full h-full xl:py-1 overflow-hidden">
-      <h1 class="text-4xl font-bold text-[#041368] pl-5 xl:hidden">Incomes</h1>
-      <div class="w-full h-full flex flex-col items-center gap-4">
-        <div class="w-90 h-160 xl:h-[90%] xl:w-[80%] bg-slate-100 rounded-md xl:order-2 flex flex-col items-center py-2 gap-2 overflow-scroll [scrollbar-width:none]">
+      <h1 class="text-4xl font-bold text-[#021c3b] pl-5 xl:hidden">Incomes</h1>
+      <div class="w-full h-full  flex flex-col items-center gap-4">
+        <div class="w-90 h-160 xl:h-[90%] xl:w-[80%] bg-slate-50 rounded-md xl:order-2 flex flex-col items-center py-2 gap-2 overflow-scroll [scrollbar-width:none]">
           <?php
 
               $host     = "localhost";
@@ -66,8 +66,8 @@
                   ?>
 <div class="w-[90%] h-20 bg-white rounded-md flex flex-row justify-between px-1">
     <div class="h-full flex flex-col justify-center items-start px-2">
-        <h1 class="text-[#041368] text-2xl font-bold"><?php echo $income['montant'] ?>$</h1>
-        <h2 class="text-[#041368] text-xl"><?php echo $income['date'] ?></h2>
+        <h1 class="text-[#021c3b] text-2xl font-bold"><?php echo $income['montant'] ?>$</h1>
+        <h2 class="text-[#021c3b] text-xl"><?php echo $income['date'] ?></h2>
     </div>
 
     <div class="flex flex-col justify-center h-full gap-1">
@@ -96,12 +96,12 @@
       <div
         class="w-[80%] h-[60%] xl:w-[50%] 2xl:w-[40%] bg-slate-100 rounded-md shadow-xl flex items-center justify-center relative">
         <form class="flex flex-col w-full h-full items-center justify-center gap-3 2xl:gap-5" action="incomeHandler.php" method="post">
-          <label for="amount" class="text-xl font-bold text-[#041368] self-start pl-8 xl:pl-16 2xl:pl-20">Amount
+          <label for="amount" class="text-xl font-bold text-[#021c3b] self-start pl-8 xl:pl-16 2xl:pl-20">Amount
             :</label>
           <input class="py-2 pl-2 w-[80%] bg-white rounded-md" type="number" name="amount" id="amount" step="0.01"
             title="ex : x.xx">
           <label for="category"
-            class="text-xl font-bold text-[#041368] self-start pl-8 xl:pl-16 2xl:pl-20">Category</label>
+            class="text-xl font-bold text-[#021c3b] self-start pl-8 xl:pl-16 2xl:pl-20">Category</label>
           <select class="py-2 pl-2 w-[80%] bg-white rounded-md" name="category" id="category">
             <option value="Salary"
               title="This is income you earn from a job, where you are paid an hourly rate to complete set tasks. The more hours you work, the more money you earn.">
@@ -127,7 +127,7 @@
             <option value="Other" title="Other source of income">Other</option>
           </select>
           <label for="description"
-            class="text-xl font-bold text-[#041368] self-start pl-8 xl:pl-16 2xl:pl-20">Description
+            class="text-xl font-bold text-[#021c3b] self-start pl-8 xl:pl-16 2xl:pl-20">Description
             : </label>
           <textarea class="py-1 pl-2 w-[80%] h-40 bg-white resize-none rounded-md" name="description"
             id="description"></textarea>

@@ -87,7 +87,7 @@ function deleteModal(id,table){
    const newSection = document.createElement("section");
     newSection.classList.add("fixed", "w-full", "h-full", "bg-black/20", "backdrop-filter", "backdrop-blur-xs", "flex", "justify-center", "items-center");
     newSection.innerHTML = `<div class="w-70 h-50 bg-slate-100 rounded-md flex flex-col items-center justify-center gap-4">
-        <p class="text-3xl font-bold text-[#041368]">Are you sure ?</p>
+        <p class="text-3xl font-bold text-[#021c3b]">Are you sure ?</p>
         <div class=" w-50 flex justify-between items-center">
           <a href="${table}.php"><button class="py-1 px-2 rounded-md bg-green-400 text-white text-2xl font-bold cursor-pointer">Cancel</button></a>
           <a href="delete.php?id=${id} &target=${table}"><button class="py-1 px-2 rounded-md bg-red-500 text-white text-2xl font-bold cursor-pointer">Delete</button></a>
@@ -100,11 +100,11 @@ function editModal(id,amount,description,table){
     newSection.classList.add("fixed", "w-full", "h-full", "bg-black/20", "backdrop-filter", "backdrop-blur-xs", "flex", "justify-center", "items-center","overlay");
     newSection.innerHTML = `<div class="w-[80%] h-[60%] xl:w-[50%] 2xl:w-[40%] bg-slate-100 rounded-md shadow-xl flex items-center justify-center relative">
       <form class="flex flex-col w-full h-full items-center justify-center gap-3 2xl:gap-5" action="edit.php?id=${id}&target=${table}" method="post">
-        <label for="amount" class="text-xl font-bold text-[#041368] self-start pl-8 xl:pl-16 2xl:pl-20">Amount :</label>
+        <label for="amount" class="text-xl font-bold text-[#021c3b] self-start pl-8 xl:pl-16 2xl:pl-20">Amount :</label>
         <input class="py-2 pl-2 w-[80%] bg-white rounded-md" type="number" name="amount" id="amount" step="0.01"
           title="ex : x.xx" value="${amount}">
         <label for="category"
-          class="text-xl font-bold text-[#041368] self-start pl-8 xl:pl-16 2xl:pl-20">Category</label>
+          class="text-xl font-bold text-[#021c3b] self-start pl-8 xl:pl-16 2xl:pl-20">Category</label>
         <select class="py-2 pl-2 w-[80%] bg-white rounded-md" name="category" id="category">
           <option value="Salary"
             title="This is income you earn from a job, where you are paid an hourly rate to complete set tasks. The more hours you work, the more money you earn.">
@@ -129,7 +129,7 @@ function editModal(id,amount,description,table){
             Government Payments</option>
           <option value="Other" title="Other source of income">Other</option>
         </select>
-        <label for="description" class="text-xl font-bold text-[#041368] self-start pl-8 xl:pl-16 2xl:pl-20">Description
+        <label for="description" class="text-xl font-bold text-[#021c3b] self-start pl-8 xl:pl-16 2xl:pl-20">Description
           : </label>
         <textarea class="py-1 pl-2 w-[80%] h-40 bg-white resize-none rounded-md" name="description"
           id="description">${description}</textarea>
