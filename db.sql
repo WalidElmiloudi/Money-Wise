@@ -18,4 +18,9 @@ CREATE TABLE IF NOT EXISTS expences(
 ALTER TABLE incomes ADD userID INT;
 ALTER TABLE expences ADD userID INT;
 
-select * from incomes;
+CREATE TABLE IF NOT EXISTS users(
+ id int PRIMARY KEY AUTO_INCREMENT,
+ name VARCHAR(25),
+ email VARCHAR(100) UNIQUE,
+ password VARCHAR(255)
+);

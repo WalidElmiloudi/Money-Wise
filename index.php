@@ -32,7 +32,7 @@
     aria-hidden="true">
     <div class="w-80 h-100 xl:w-120 xl:h-140 bg-slate-100 rounded-md flex justify-center items-center flex-col gap-4 xl:gap-8">
       <h1 class="text-green-600 font-bold text-2xl xl:text-4xl">LOGIN</h1>
-      <form action="" class="flex flex-col justify-center items-center gap-2 xl:gap-4">
+      <form action="login.php" method="post" class="flex flex-col justify-center items-center gap-2 xl:gap-4">
         <input class="text-xl py-1 pl-1 pr-5 bg-white rounded-md text-[#021c3b] xl:text-3xl xl:py-3 xl:pl-3 xl:pr-15" type="email" name="email"
           placeholder="Email" required>
         <input class="text-xl py-1 pl-1 pr-5 bg-white rounded-md text-[#021c3b] xl:text-3xl xl:py-3 xl:pl-3 xl:pr-15" type="password" name="password"
@@ -54,11 +54,11 @@
     aria-hidden="true">
     <div class="w-80 h-100 xl:w-120 xl:h-140 bg-slate-100 rounded-md flex justify-center items-center flex-col gap-4 xl:gap-8">
       <h1 class="text-blue-600 font-bold text-2xl xl:text-4xl">SIGN UP</h1>
-      <form action="" class="flex flex-col justify-center items-center gap-2 xl:gap-4">
+      <form action="register.php" method="post" class="flex flex-col justify-center items-center gap-2 xl:gap-4">
         <div class="flex justify-center items-center gap-2.5">
           <input class="text-lg py-1 pl-1 w-30 bg-white rounded-md text-[#021c3b] xl:text-xl xl:py-3 xl:pl-3 xl:w-50" type="text" name="firstname"
             placeholder="First Name" required title="Please no digits or special caracteres">
-          <input class="text-lg py-1 pl-1 w-30 bg-white rounded-md text-[#021c3b] xl:text-xl xl:py-3 xl:pl-3 xl:w-50" type="text" name="lasttname"
+          <input class="text-lg py-1 pl-1 w-30 bg-white rounded-md text-[#021c3b] xl:text-xl xl:py-3 xl:pl-3 xl:w-50" type="text" name="lastname"
             placeholder="Last Name" required title="Please no digits or special caracteres">
         </div>
         <input class="text-xl py-1 pl-1 pr-5 bg-white rounded-md text-[#021c3b] xl:text-3xl xl:py-3 xl:pl-3 xl:pr-15" type="email" name="email"

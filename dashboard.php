@@ -2,6 +2,10 @@
 
     require 'config.php';
     session_start();
+    if(!isset($_SESSION['userId'])){
+  header("Location: index.php");
+  exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -61,12 +65,12 @@
           <?php
               $totalIncomes      = 0;
               $_SESSION['monthTotalIncomes'] = 0;
-              $monthResult       = $conn->query("SELECT SUM(montant) AS total FROM incomes WHERE MONTH(date) = MONTH(CURDATE()) and YEAR(date) = YEAR(CURDATE())");
+              $monthResult       = $conn->query("SELECT SUM(montant) AS total FROM incomes join users on incomes.userID = users.id WHERE MONTH(date) = MONTH(CURDATE()) and YEAR(date) = YEAR(CURDATE())");
               if ($monthResult) {
                   $amount            = $monthResult->fetch_assoc();
                   $_SESSION['monthTotalIncomes'] = $amount['total']>0 ? $amount['total']:0;
               }
-              $result = $conn->query("SELECT SUM(montant) AS total FROM incomes");
+              $result = $conn->query("SELECT SUM(montant) AS total FROM incomes join users on incomes.userID = users.id");
 
               if ($result) {
                   $amount       = $result->fetch_assoc();
@@ -84,10 +88,10 @@
       <div class="xl:order-3 col-span-1 row-span-2 xl:col-span-4 xl:row-span-2 bg-white shadow-md rounded-md">
 
               <?php
-                  $result             = $conn->query("SELECT SUM(montant) AS total FROM expences");
+                  $result             = $conn->query("SELECT SUM(montant) AS total FROM expences join users on expences.userID = users.id");
                   $totalExpences      = 0;
                   $_SESSION['monthTotalExpences'] = 0;
-                  $monthResult        = $conn->query("SELECT SUM(montant) AS total FROM expences WHERE MONTH(date) = MONTH(CURDATE()) and YEAR(date) = YEAR(CURDATE())");
+                  $monthResult        = $conn->query("SELECT SUM(montant) AS total FROM expences join users on expences.userID = users.id WHERE MONTH(date) = MONTH(CURDATE()) and YEAR(date) = YEAR(CURDATE())");
                   if ($monthResult) {
                       $amount             = $monthResult->fetch_assoc();
                       $_SESSION['monthTotalExpences'] = $amount['total']>0 ? $amount['total']:0;
@@ -133,13 +137,11 @@ $monthlyIncomes = [];
 $monthlyExpences = [];
 
 for ($m = 1; $m <= 12; $m++) {
-    $resIncome = $conn->query("SELECT SUM(montant) AS total FROM incomes 
-                              WHERE MONTH(date)=$m AND YEAR(date)=YEAR(CURDATE())");
+    $resIncome = $conn->query("SELECT SUM(montant) AS total FROM incomes join users on incomes.userID = users.id WHERE MONTH(date)=$m AND YEAR(date)=YEAR(CURDATE())");
     $income = $resIncome->fetch_assoc()['total'] ?? 0;
     $monthlyIncomes[] = $income;
 
-    $resExpence = $conn->query("SELECT SUM(montant) AS total FROM expences 
-                               WHERE MONTH(date)=$m AND YEAR(date)=YEAR(CURDATE())");
+    $resExpence = $conn->query("SELECT SUM(montant) AS total FROM expences join users on expences.userID = users.id WHERE MONTH(date)=$m AND YEAR(date)=YEAR(CURDATE())");
     $expense = $resExpence->fetch_assoc()['total'] ?? 0;
     $monthlyExpences[] = $expense;
 }

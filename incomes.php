@@ -2,6 +2,10 @@
 
     require 'config.php';
     session_start();
+    if(!isset($_SESSION['userId'])){
+  header("Location: index.php");
+  exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -172,7 +176,7 @@
             <?php
                     }
                 } else {
-                    $result = $conn->query("SELECT * FROM incomes");
+                    $result = $conn->query("SELECT * FROM incomes join users on incomes.userID = users.id");
                     if ($result->num_rows > 0) {
                         while ($income = $result->fetch_assoc()) {
                             $id = $income['id'];
@@ -194,7 +198,7 @@
                         
                     }
                 }
-                session_unset();
+                unset($_SESSION['filteredArray']);;
             ?>
            </div>
           </div>

@@ -5,6 +5,7 @@ session_start();
 $category = $_POST['category'];
 $date     = $_POST['date'];
 $table    = $_GET['target'];
+$userID = $_SESSION['userId'];
 
 $_SESSION['category'] = $category;
 $_SESSION['date'] = $date;
@@ -16,7 +17,7 @@ if ($category != "All") {
         switch ($date) {
             case "CURMONTH":$date = date('m');
             $currentYear = date('Y');
-                $result               = $conn->query("SELECT * FROM $table WHERE category = '$category' AND (MONTH(date) = $date AND YEAR(date) = $currentYear)");
+                $result               = $conn->query("SELECT * FROM $table  join users on $table.userID = users.id WHERE category = '$category' AND (MONTH(date) = $date AND YEAR(date) = $currentYear)");
                 if ($result->num_rows > 0) {
                     while ($filtered = $result->fetch_assoc()) {
                         $_SESSION['filteredArray'][] = $filtered;
@@ -25,7 +26,7 @@ if ($category != "All") {
                 break;
             case "LASMONTH":$date = (date('m') == 01?12:date('m')-1);
             $currentYear = date('Y');
-                $result               = $conn->query("SELECT * FROM $table WHERE category = '$category' AND (MONTH(date) = $date AND YEAR(date) = $currentYear)");
+                $result               = $conn->query("SELECT * FROM $table  join users on $table.userID = users.id WHERE category = '$category' AND (MONTH(date) = $date AND YEAR(date) = $currentYear)");
                 if ($result->num_rows > 0) {
                     while ($filtered = $result->fetch_assoc()) {
                         $_SESSION['filteredArray'][] = $filtered;
@@ -33,7 +34,7 @@ if ($category != "All") {
                 }
                 break;
             case "CURYEAR":$date = date('Y');
-                $result               = $conn->query("SELECT * FROM $table WHERE category = '$category' AND YEAR(date) = $date");
+                $result               = $conn->query("SELECT * FROM $table  join users on $table.userID = users.id WHERE category = '$category' AND YEAR(date) = $date");
                 if ($result->num_rows > 0) {
                     while ($filtered = $result->fetch_assoc()) {
                         $_SESSION['filteredArray'][] = $filtered;
@@ -41,7 +42,7 @@ if ($category != "All") {
                 }
                 break;
             case "LASTYEAR":$date = date('Y') - 1;
-            $result               = $conn->query("SELECT * FROM $table WHERE category = '$category' AND YEAR(date) = $date");
+            $result               = $conn->query("SELECT * FROM $table  join users on $table.userID = users.id WHERE category = '$category' AND YEAR(date) = $date");
                 if ($result->num_rows > 0) {
                     while ($filtered = $result->fetch_assoc()) {
                         $_SESSION['filteredArray'][] = $filtered;
@@ -50,7 +51,7 @@ if ($category != "All") {
                 break;
         }
     } else{
-       $result = $conn->query("SELECT * FROM $table WHERE category = '$category'");
+       $result = $conn->query("SELECT * FROM $table  join users on $table.userID = users.id WHERE category = '$category'");
     if($result->num_rows>0){
       while($filtered = $result->fetch_assoc()){
         $_SESSION['filteredArray'][]=$filtered;
@@ -59,7 +60,7 @@ if ($category != "All") {
     }
 
 } else {
-    $result = $conn->query("SELECT * FROM $table");
+    $result = $conn->query("SELECT * FROM $table  join users on $table.userID = users.id");
     if ($result->num_rows > 0) {
         while ($filtered = $result->fetch_assoc()) {
             $_SESSION['filteredArray'][] = $filtered;

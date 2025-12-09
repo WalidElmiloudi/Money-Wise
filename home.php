@@ -1,5 +1,10 @@
 <?php
 require 'config.php';
+session_start();
+if(!isset($_SESSION['userId'])){
+  header("Location: index.php");
+  exit;
+}
 
 ?>
 
@@ -38,7 +43,7 @@ require 'config.php';
     </div>
     <div
       class="xl:order-2 row-span-1 rounded-md bg-white shadow-md flex justify-center items-center xl:row-span-3 xl:col-span-4 2xl:col-span-7">
-      <p class="text-3xl font-bold text-[#021c3b] 2xl:text-5xl">Welcome User !</p>
+      <p class="text-3xl font-bold text-[#021c3b] 2xl:text-5xl">Welcome <?php echo $_SESSION['username']; ?> !</p>
     </div>
     <div
       class="xl:order-4 row-span-3 rounded-md bg-white shadow-md flex justify-center items-center xl:row-span-5 xl:col-span-4 2xl:col-span-7">

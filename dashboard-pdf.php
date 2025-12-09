@@ -1,8 +1,13 @@
 <?php
+session_start();
+if(!isset($_SESSION['userId'])){
+  header("Location: index.php");
+  exit;
+}
 require "vendor/autoload.php";
 use Dompdf\Dompdf;
 
-session_start();
+
 
 ob_start();
 ?>
