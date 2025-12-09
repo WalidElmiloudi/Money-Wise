@@ -54,7 +54,7 @@
        <div class = "w-[90%] h-[90%] bg-white rounded-lg flex flex-col justify-center gap-2 items-center p-4">
           <div class="w-full flex flex-row justify-between xl:px-10 2xl:px-16">
           <h1 class="text-3xl  xl:text-4xl text-[#021c3b] font-bold self-start">Expences</h1>
-          <div class="relative">
+          <div class="relative xl:hidden">
               <i id="filterBtn" class="fi fi-rr-filter"></i>
               <div id="filter" class="w-30 h-40 xl:w-50 xl:h-60 bg-gray-200 absolute right-0 rounded-md shadow-lg hidden">
    <form class="h-full flex flex-col gap-2 p-2 xl:justify-around" action="filter.php?target=expences" method = "post">

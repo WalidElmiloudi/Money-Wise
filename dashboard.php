@@ -1,3 +1,9 @@
+<?php
+
+    require 'config.php';
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +19,6 @@
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-chubby/css/uicons-solid-chubby.css'>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 
 <body class="w-full h-screen flex flex-col bg-slate-100 font-['open_sans']">
@@ -37,7 +42,10 @@
       </div>
     </div>
   </section>
-  <main class="w-full h-full flex flex-col gap-2" aria-hidden="true">
+  <main class="w-full h-full flex flex-col gap-2 relative">
+    <div class="border-2 2xl:border-4 bg-white w-10 h-10 2xl:w-15 2xl:h-15 flex justify-center items-center rounded-full absolute right-2 top-0 xl:right-4 xl:top-2" title="Download as pdf">
+      <a href="dashboard-pdf.php"><i class="fi fi-br-download text-xl 2xl:text-3xl"></i></a>
+    </div>
     <h1 class="text-4xl font-bold text-[#021c3b] pl-2 xl:hidden">Dashboard</h1>
     <div class="w-full h-full grid grid-cols-2 xl:grid-cols-14 grid-rows-8 gap-2 px-2">
       <div class="xl:order-1 hidden xl:flex col-span-3 row-span-8 bg-white shadow-md rounded-md">
@@ -51,25 +59,18 @@
       </div>
       <div class="xl:order-2 col-span-1 xl:col-span-4 xl:row-span-2 row-span-2 bg-white shadow-md rounded-md flex justify-center items-center">
           <?php
-
-              $host     = "localhost";
-              $user     = "root";
-              $password = "";
-              $db       = "smart_wallet";
-
-              $conn              = new mysqli($host, $user, $password, $db);
               $totalIncomes      = 0;
-              $monthTotalIncomes = 0;
+              $_SESSION['monthTotalIncomes'] = 0;
               $monthResult       = $conn->query("SELECT SUM(montant) AS total FROM incomes WHERE MONTH(date) = MONTH(CURDATE()) and YEAR(date) = YEAR(CURDATE())");
               if ($monthResult) {
                   $amount            = $monthResult->fetch_assoc();
-                  $monthTotalIncomes = $amount['total']>0 ? $amount['total']:0;
+                  $_SESSION['monthTotalIncomes'] = $amount['total']>0 ? $amount['total']:0;
               }
               $result = $conn->query("SELECT SUM(montant) AS total FROM incomes");
 
               if ($result) {
                   $amount       = $result->fetch_assoc();
-                  $totalIncomes = $amount['total'];
+                  $_SESSION['totalIncomes'] = $amount['total'];
               ?>
                   <div class  = "w-full h-full bg-white  rounded-md flex flex-col justify-around" >
                   <h1 class   = "text-2xl xl:text-4xl font-bold text-[#021c3b]">Total Incomes:  </h1>
@@ -85,15 +86,15 @@
               <?php
                   $result             = $conn->query("SELECT SUM(montant) AS total FROM expences");
                   $totalExpences      = 0;
-                  $monthTotalExpences = 0;
+                  $_SESSION['monthTotalExpences'] = 0;
                   $monthResult        = $conn->query("SELECT SUM(montant) AS total FROM expences WHERE MONTH(date) = MONTH(CURDATE()) and YEAR(date) = YEAR(CURDATE())");
                   if ($monthResult) {
                       $amount             = $monthResult->fetch_assoc();
-                      $monthTotalExpences = $amount['total']>0 ? $amount['total']:0;
+                      $_SESSION['monthTotalExpences'] = $amount['total']>0 ? $amount['total']:0;
                   }
                   if ($result) {
                       $amount        = $result->fetch_assoc();
-                      $totalExpences = $amount['total'];
+                      $_SESSION['totalExpences'] = $amount['total'];
                   ?>
                   <div class  = "w-full h-full bg-white  rounded-md flex flex-col justify-around" >
                   <h1 class   = "text-2xl xl:text-4xl font-bold text-[#021c3b]">Total Expences:  </h1>
@@ -101,7 +102,7 @@
                   </div >
                <?php
                    }
-                   $balance = $totalIncomes - $totalExpences;
+                   $_SESSION['balance'] = $_SESSION['totalIncomes'] - $_SESSION['totalExpences'];
                ?>
 
       </div>
@@ -114,15 +115,15 @@
       <div class="xl:order-4 col-span-2 xl:col-span-3 xl:row-span-8 row-span-4 bg-slate-200 shadow-md rounded-md grid grid-rows-3 gap-2">
         <div class="col-span-1  rounded-lg bg-white flex flex-col justify-evenly">
             <h1 class="text-[#021c3b] text-2xl xl:text-3xl 2xl:text-5xl font-bold">Balance :</h1>
-            <h2 class="text-[#021c3b] text-3xl xl:text-4xl 2xl:text-5xl font-bold"><?php echo $balance; ?> $</h2>
+            <h2 class="text-[#021c3b] text-3xl xl:text-4xl 2xl:text-5xl font-bold"><?php echo $_SESSION['balance']; ?> $</h2>
         </div>
         <div class="col-span-1   rounded-lg bg-white flex flex-col justify-evenly">
           <h1 class="text-[#021c3b] text-2xl 2xl:text-4xl font-bold">Month Incomes :</h1>
-            <h2 class="text-green-600 text-3xl xl:text-4xl 2xl:text-5xl font-bold"><?php echo $monthTotalIncomes; ?> $</h2>
+            <h2 class="text-green-600 text-3xl xl:text-4xl 2xl:text-5xl font-bold"><?php echo $_SESSION['monthTotalIncomes']; ?> $</h2>
         </div>
         <div class="col-span-1  rounded-lg bg-white flex flex-col justify-evenly">
           <h1 class="text-[#021c3b] text-2xl 2xl:text-4xl font-bold">Month Expences :</h1>
-            <h2 class="text-red-600 text-3xl xl:text-4xl 2xl:text-5xl font-bold"><?php echo $monthTotalExpences; ?> $</h2>
+            <h2 class="text-red-600 text-3xl xl:text-4xl 2xl:text-5xl font-bold"><?php echo $_SESSION['monthTotalExpences']; ?> $</h2>
         </div>
       </div>
     </div>
