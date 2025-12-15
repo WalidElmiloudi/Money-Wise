@@ -1,12 +1,20 @@
 <?php
 require 'config.php';
 
-$name = $_POST['firstname']." ".$_POST['lastname'];
-$email = $_POST['email'];
-$password = $_POST['password'];
+$name = htmlspecialchars(trim($_POST['firstname']))." ".htmlspecialchars(trim($_POST['lastname']));
+$email = htmlspecialchars(trim($_POST['email']));
+$password = htmlspecialchars(trim($_POST['password']));
 $hashedPassword = password_hash($password,PASSWORD_DEFAULT);
 
-$conn->query("INSERT INTO users (name,email,password) VALUES ('$name','$email','$hashedPassword')");
+
+
+$pdo = $conn->prepare("INSERT INTO users (name,email,password) VALUES (:name,:email,:password)");
+$pdo->execute([
+':name' => $name,
+':email' => $email,
+':password' => $hashedPassword
+]);
+
 
 header("Location: index.php");
 exit;

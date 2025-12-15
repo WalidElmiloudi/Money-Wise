@@ -20,7 +20,8 @@ ALTER TABLE expences ADD userID INT;
 
 CREATE TABLE IF NOT EXISTS users(
  id int PRIMARY KEY AUTO_INCREMENT,
- name VARCHAR(25),
+ name VARCHAR(255),
  email VARCHAR(100) UNIQUE,
  password VARCHAR(255)
 );
+

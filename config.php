@@ -5,6 +5,8 @@ $user = "root";
 $password = "";
 $db = "smart_wallet";
 
-$conn = new mysqli($host,$user,$password,$db);
+$conn = new PDO('mysql:host='.$host.';dbname='.$db.'',$user,$password);
+
+
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 require 'config.php';
 session_start();
-if(!isset($_SESSION['userId'])){
+if(!$_SESSION['validate']){
   header("Location: index.php");
   exit;
 }
