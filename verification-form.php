@@ -1,6 +1,5 @@
 <?php
 require 'config.php';
-session_start();
 if(!isset($_SESSION['verification_code'])){
   header("Location: index.php");
   exit;

@@ -1,6 +1,5 @@
 <?php
 require 'config.php';
-session_start();
 if(!$_SESSION['validate']){
   header("Location: index.php");
   exit;
@@ -31,7 +30,8 @@ if(!$_SESSION['validate']){
       <a href="account.php"><i class="fi fi-sc-user text-xl text-[#021c3b]"></i></a>
     </div>
   </header>
-  <section id="home" class="grid w-full h-full px-5 xl:px-2 grid-rows-8 xl:grid-cols-8 2xl:grid-cols-12 gap-2 xl:gap-4">
+  <section id="home" class="grid w-full h-full px-5 xl:px-2 grid-rows-8 xl:grid-cols-8 2xl:grid-cols-12 gap-2 xl:gap-4 relative">
+    <a class="absolute top-5 left-15" href="logout.php"><button class="py-2 px-2 text-4xl text-white font-bold bg-green-500 rounded-md cursor-pointer">LOGOUT</button></a>
     <div class="xl:order-1 hidden xl:flex row-span-8 col-span-2 2xl:col-span-2 bg-white">
        <div class="hidden w-[30%] bg-white h-full xl:flex flex-col justify-center gap-20 pl-10">
       <h1 class=" text-4xl font-bold text-white bg-gray-800 rounded-full py-2 px-4 w-fit "><a href="#">Home</a></h1>

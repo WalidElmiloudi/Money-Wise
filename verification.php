@@ -1,10 +1,10 @@
 <?php
 require 'config.php';
-session_start();
 
 $code = $_POST['verification_code'];
 
 if($code == $_SESSION['verification_code']){
+  session_regenerate_id(true);
   $_SESSION['validate'] = true;
   header("Location: home.php");
     exit;
