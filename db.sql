@@ -25,3 +25,11 @@ CREATE TABLE IF NOT EXISTS users(
  password VARCHAR(255)
 );
 
+CREATE TABLE IF NOT EXISTS cards(
+id INT PRIMARY KEY AUTO_INCREMENT,
+user_id INT,
+statut ENUM('main','secondary'),
+balance DECIMAL(10,2),
+bank_name VARCHAR(20)
+);
+

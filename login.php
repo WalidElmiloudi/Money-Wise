@@ -16,31 +16,27 @@ $result->execute([':email' => $email]);
     $_SESSION['userID'] =$user['id'];
     $_SESSION['username'] =$user['name'];
     $_SESSION['verification_code'] = random_int(100000,999999);
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
 
-
-//Load Composer's autoloader (created by composer, not included with PHPMailer)
 require 'vendor/autoload.php';
 
-//Create an instance; passing `true` enables exceptions
+
 $mail = new PHPMailer(true);
 
-    //Server settings              
+            
      $mail->isSMTP();
     $mail->Host       = 'smtp-relay.brevo.com';
     $mail->SMTPAuth   = true;
     $mail->Username   = '9e1934001@smtp-brevo.com';
     $mail->Password   = 'bskd3kqludBgTAm';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port       = 587;                                 //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->Port       = 587;                                 
 
-    //Recipients
+    
     $mail->setFrom('walidelmiloudi20@gmail.com', 'Money Wise');
-    $mail->addAddress($email, $_SESSION['username']);     //Add a recipient
+    $mail->addAddress($email, $_SESSION['username']);     
 
-    //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
+
+    $mail->isHTML(true);                                  
     $mail->Subject = 'Verification';
     $mail->Body    = '<h1>'.$_SESSION['verification_code'].'</h1>';
     $mail->AltBody = 'this email is sent via MoneyWise';
