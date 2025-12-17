@@ -1,34 +1,36 @@
-
 <?php
 
-require 'config.php';
+    require 'config.php';
 if(!$_SESSION['validate']){
   header("Location: index.php");
   exit;
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MONEYWISE-FINANCE TRACKER | ACCOUNT PAGE</title>
+  <title>MONEYWISE-FINANCE TRACKER | INCOMES PAGE</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet">
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-chubby/css/uicons-regular-chubby.css'>
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-chubby/css/uicons-solid-chubby.css'>
-  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css'>
 </head>
 
-<body class="w-full h-screen flex flex-col bg-slate-100 font-['open_sans']">
+<body class="w-full h-screen flex flex-col bg-slate-100 font-['open_sans'] text-[#021c3b]">
   <header class=" w-full justify-between px-3 h-15 flex items-center xl:hidden">
     <i id="menuBg" class="fi fi-br-menu-burger text-3xl text-[#021c3b]"></i>
+    <div class="w-8 h-8 border-2 border-[#021c3b] flex justify-center items-center rounded-full">
+     <a href="account.php"><i class="fi fi-sc-user text-xl text-[#021c3b]"></i></a>
+    </div>
   </header>
   <section id="menu"
     class="fixed w-full h-full overlay bg-black/20 backdrop-filter backdrop-blur-xs shadow-lg hidden flex-col"
@@ -40,25 +42,31 @@ if(!$_SESSION['validate']){
       <div class="w-full h-full flex flex-col justify-center gap-20 pl-10 -mt-5">
         <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="home.php">Home</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="dashboard.php">Dashboard</a></h1>
-        <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="incomes.php">Incomes</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b]"><a href="expences.php">Expences</a></h1>
       </div>
     </div>
   </section>
-  <main id="account" class="w-full h-full flex flex-col xl:flex-row gap-4 items-center" aria-hidden="true">
-    <div class="hidden w-[30%] bg-white h-full xl:flex flex-col justify-center gap-20 pl-10">
+  <main class="w-full h-full flex flex-col xl:flex-row gap-4">
+    <div class="hidden w-[20%] bg-white h-full xl:flex flex-col justify-center gap-10 pl-10">
       <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="home.php">Home</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="dashboard.php">Dashboard</a></h1>
-        <h1 class=" text-4xl font-bold  py-2 px-4 w-fit  hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="incomes.php">Incomes</a></h1>
-        <h1 class=" text-4xl font-bold  py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="expences.php">Expences</a></h1>
-      <h1 class=" text-4xl font-bold text-white bg-gray-800 rounded-full py-2 px-4 w-fit "><a href="#">Account</a></h1>
+        <div class="w-full">
+          <h1 class=" text-4xl font-bold  px-4 py-2 w-fit text-white bg-gray-800 rounded-full"><a href="#.php">Payements</a></h1>
+        <div class="flex flex-col h-full items-start gap-2 py-2">
+          <h2 class=" text-2xl font-bold   px-4 py-2 pl-10 w-fit   scale-110 text-gray-800 rounded-full ease-in-out duration-150 "><a href="#.php"> Bank Cards</a></h2>
+          <h2 class=" text-2xl font-bold text-gray-500 pl-10 px-4 py-2 w-fit   hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 "><a href="incomes.php"> Incomes</a></h2>
+          <h2 class=" text-2xl font-bold text-gray-500 pl-10  px-4 py-2 w-fit  hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 "><a href="expences.php"> Expences</a></h2>
+        </div>
+        </div>
+      <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="account.php">Account</a></h1>
  <hr class="w-50 border-2">
       <h1 class="text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white flex items-center justify-center cursor-pointer"><i class="fi fi-rs-sign-out-alt"></i><a href="logout.php">LOGOUT</a></h1>    </div>
-    <div class="w-full h-full xl:py-1 flex flex-col items-center gap-3">
-      <h1 class="text-4xl font-bold text-[#021c3b] pl-5">Account</h1>
-      <div class="w-[90%] h-[90%] bg-slate-50 rounded-md">
+    <div class ="w-full h-full bg-[#f2f4f7] flex justify-center items-center">
+       <div class = "w-[95%] h-[95%] bg-white rounded-lg flex flex-col justify-center gap-2 items-center p-4">
+          
       </div>
     </div>
   </main>
   <script src="script.js"></script>
 </body>
+</html>

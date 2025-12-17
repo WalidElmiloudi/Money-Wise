@@ -19,6 +19,7 @@ const filterBtn = document.getElementById("filterBtn");
 const sortBtn = document.getElementById("sortBtn");
 const filter = document.getElementById("filter");
 const sort = document.getElementById("sort");
+const clock = document.getElementById("clock");
 
 if (openLoginModal) {
   openLoginModal.addEventListener("click", () => {
@@ -153,11 +154,35 @@ function editModal(id,amount,description,table,category){
   select.value = category;
   console.log(select.value);
 }
-
-filterBtn.addEventListener("click",()=>{
+if(filterBtn){
+  filterBtn.addEventListener("click",()=>{
   filter.classList.toggle("hidden");
 })
+}
 
-sortBtn.addEventListener("click",()=>{
+if(sortBtn){
+  sortBtn.addEventListener("click",()=>{
   sort.classList.toggle("hidden");
 })
+}
+
+
+function updateTime(){
+    const now = new Date(); 
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+
+    hours = hours < 10 ? "0" + hours : hours;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    const timeString = `${hours}:${minutes}:${seconds}`;
+
+    clock.textContent = timeString;
+}
+
+
+updateTime();
+
+setInterval(updateTime, 1000);

@@ -21,6 +21,7 @@ if(!$_SESSION['validate']){
     rel="stylesheet">
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-chubby/css/uicons-solid-chubby.css'>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css'>
 </head>
 
 <body class="w-full h-screen flex flex-col bg-slate-100 font-['open_sans']">
@@ -30,20 +31,33 @@ if(!$_SESSION['validate']){
       <a href="account.php"><i class="fi fi-sc-user text-xl text-[#021c3b]"></i></a>
     </div>
   </header>
-  <section id="home" class="grid w-full h-full px-5 xl:px-2 grid-rows-8 xl:grid-cols-8 2xl:grid-cols-12 gap-2 xl:gap-4 relative">
-    <a class="absolute top-5 left-15" href="logout.php"><button class="py-2 px-2 text-4xl text-white font-bold bg-green-500 rounded-md cursor-pointer">LOGOUT</button></a>
+  <section id="home" class="grid w-full h-full px-5 xl:px-2 grid-rows-8 xl:grid-cols-8 2xl:grid-cols-12 gap-2 xl:gap-4">
+
     <div class="xl:order-1 hidden xl:flex row-span-8 col-span-2 2xl:col-span-2 bg-white">
-       <div class="hidden w-[30%] bg-white h-full xl:flex flex-col justify-center gap-20 pl-10">
-      <h1 class=" text-4xl font-bold text-white bg-gray-800 rounded-full py-2 px-4 w-fit "><a href="#">Home</a></h1>
-        <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="dashboard.php">Dashboard</a></h1>
-        <h1 class=" text-4xl font-bold  py-2 px-4 w-fit  hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="incomes.php">Incomes</a></h1>
-        <h1 class=" text-4xl font-bold  py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="expences.php">Expences</a></h1>
-      <h1 class=" text-4xl font-bold  py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="account.php">Account</a></h1>
+       <div class="hidden w-[30%] bg-white h-full xl:flex flex-col justify-center gap-15 pl-10">
+      <h1 class=" text-4xl font-bold text-white bg-gray-800 rounded-full  px-4 py-2 w-fit "><a href="#">Home</a></h1>
+        <h1 class=" text-4xl font-bold text-[#021c3b]  px-4 py-2 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="dashboard.php">Dashboard</a></h1>
+        <div class="w-full">
+          <h1 class=" text-4xl font-bold text-[#021c3b]  px-4 py-2 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="cards.php">Payements</a></h1>
+        <div class="hidden flex-col h-full items-start gap-2 py-2">
+          <h2 class=" text-2xl font-bold text-gray-500  px-4 py-2 w-fit   hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white ml-10"><a href="incomes.php"> Incomes</a></h2>
+          <h2 class=" text-2xl font-bold text-gray-500   px-4 py-2 w-fit  hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white ml-10"><a href="expences.php"> Expences</a></h2>
+        </div>
+        </div>
+      <h1 class=" text-4xl font-bold   px-4 py-2 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="account.php">Account</a></h1>
+      <hr class="w-50 border-2">
+      <h1 class="text-4xl font-bold text-[#021c3b]  px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white flex items-center justify-center cursor-pointer"><i class="fi fi-rs-sign-out-alt"></i><a href="logout.php">LOGOUT</a></h1>
     </div>
     </div>
     <div
-      class="xl:order-2 row-span-1 rounded-md bg-white shadow-md flex justify-center items-center xl:row-span-3 xl:col-span-4 2xl:col-span-7">
-      <p class="text-3xl font-bold text-[#021c3b] 2xl:text-5xl">Welcome <?php echo $_SESSION['username']; ?> !</p>
+      class="xl:order-2 row-span-1 rounded-md bg-white shadow-md flex  xl:row-span-3 xl:col-span-4 2xl:col-span-7">
+      <div>
+        <p class="text-3xl font-bold text-[#021c3b] 2xl:text-4xl p-5">Welcome <br><span class="2xl:text-7xl"><?php echo $_SESSION['username']; ?> !</span></p>
+      <div>
+        <p class="text-3xl font-bold text-[#021c3b] 2xl:text-4xl p-5">Time Now : <br><span id="clock" class="2xl:text-8xl"></span></p>
+      </div>
+      </div>
+      
     </div>
     <div
       class="xl:order-4 row-span-3 rounded-md bg-white shadow-md flex justify-center items-center xl:row-span-5 xl:col-span-4 2xl:col-span-7">

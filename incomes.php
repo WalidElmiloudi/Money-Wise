@@ -1,7 +1,7 @@
 <?php
 
     require 'config.php';
-    if(!isset($_SESSION['userId'])){
+if(!$_SESSION['validate']){
   header("Location: index.php");
   exit;
 }
@@ -22,6 +22,7 @@
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-chubby/css/uicons-regular-chubby.css'>
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-chubby/css/uicons-solid-chubby.css'>
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css'>
 </head>
 
 <body class="w-full h-screen flex flex-col bg-slate-100 font-['open_sans'] text-[#021c3b]">
@@ -52,7 +53,8 @@
         <h1 class=" text-4xl font-bold rounded-full py-2 px-4 w-fit bg-gray-800 text-white"><a href="#">Incomes</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="expences.php">Expences</a></h1>
       <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="account.php">Account</a></h1>
-    </div>
+ <hr class="w-50 border-2">
+      <h1 class="text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white flex items-center justify-center cursor-pointer"><i class="fi fi-rs-sign-out-alt"></i><a href="logout.php">LOGOUT</a></h1>    </div>
     <div class ="w-full h-full bg-[#f2f4f7] flex justify-center items-center">
        <div class = "w-[90%] h-[90%] bg-white rounded-lg flex flex-col justify-center gap-2 items-center p-4">
         <div class="w-full h-full flex flex-row items-center justify-between xl:px-10">
