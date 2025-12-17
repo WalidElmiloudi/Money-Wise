@@ -24,12 +24,12 @@ $mail = new PHPMailer(true);
 
             
      $mail->isSMTP();
-    $mail->Host       = 'smtp-relay.brevo.com';
+    $mail->Host       = $_ENV['SMTP_HOST'];;
     $mail->SMTPAuth   = true;
-    $mail->Username   = '9e1934001@smtp-brevo.com';
-    $mail->Password   = 'bskd3kqludBgTAm';
+    $mail->Username   = $_ENV['SMTP_USER'];;
+    $mail->Password   = $_ENV['SMTP_PASS'];;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port       = 587;                                 
+    $mail->Port       = $_ENV['SMTP_PORT'];;                                 
 
     
     $mail->setFrom('walidelmiloudi20@gmail.com', 'Money Wise');

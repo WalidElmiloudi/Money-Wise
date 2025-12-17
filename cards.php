@@ -62,8 +62,11 @@ if(!$_SESSION['validate']){
  <hr class="w-50 border-2">
       <h1 class="text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white flex items-center justify-center cursor-pointer"><i class="fi fi-rs-sign-out-alt"></i><a href="logout.php">LOGOUT</a></h1>    </div>
     <div class ="w-full h-full bg-[#f2f4f7] flex justify-center items-center">
-       <div class = "w-[95%] h-[95%] bg-white rounded-lg flex flex-col justify-center gap-2 items-center p-4">
-          
+       <div class = "w-[95%] h-[95%] bg-white rounded-lg grid grid-cols-6 grid-rows-2 gap-4 p-2">
+          <div class="border rounded-md col-span-2 row-span-1">card</div>
+          <div class="border rounded-md col-span-2 row-span-1">finance</div>
+          <div class="border rounded-md col-span-2 row-span-2">history</div>
+          <div class="border rounded-md col-span-4 row-span-1">actions</div>
       </div>
     </div>
   </main>
