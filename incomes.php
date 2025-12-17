@@ -33,7 +33,7 @@ if(!$_SESSION['validate']){
     </div>
   </header>
   <section id="menu"
-    class="fixed w-full h-full overlay bg-black/20 backdrop-filter backdrop-blur-xs shadow-lg hidden flex-col"
+    class="fixed w-full h-full overlay bg-black/20 backdrop-filter backdrop-blur-xs hidden flex-col"
     aria-hidden="true">
     <div class="w-[80%] h-screen bg-white pt-3">
       <div class="w-full flex justify-end pr-3">

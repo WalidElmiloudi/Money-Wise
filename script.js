@@ -166,8 +166,8 @@ if(sortBtn){
 })
 }
 
-
-function updateTime(){
+if(clock){
+  function updateTime(){
     const now = new Date(); 
     let hours = now.getHours();
     let minutes = now.getMinutes();
@@ -181,8 +181,9 @@ function updateTime(){
 
     clock.textContent = timeString;
 }
-
-
 updateTime();
 
 setInterval(updateTime, 1000);
+}
+
+
