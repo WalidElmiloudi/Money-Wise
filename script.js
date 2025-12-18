@@ -35,7 +35,7 @@ const closeaddCLModal = document.getElementById("closeaddCLModal");
 const openaddRTModal = document.getElementById("openaddRTModal");
 const addRTModal = document.getElementById("addRTModal");
 const closeRTModal = document.getElementById("closeRTModal");
-const typeSelect = document.getElementById("typeSelect;")
+const typeSelect = document.getElementById("typeSelect")
 
 if (openLoginModal) {
   openLoginModal.addEventListener("click", () => {
@@ -249,5 +249,72 @@ if(clock){
 updateTime();
 
 setInterval(updateTime, 1000);
+}
+if(typeSelect){
+  typeSelect.addEventListener("change",(e)=>{
+    selectValue = e.target.value;
+    newDiv = document.getElementById("newDiv");
+    switch(selectValue){
+      case 'Incomes' : 
+                      newDiv.innerHTML = `<label for="category"
+            class="text-2xl font-bold">Category</label>
+          <select class="text-lg bg-[#e2e2e2] py-2 pl-2 pr-20 rounded-md" name="category" id="category">
+            <option value="Salary"
+              title="This is income you earn from a job, where you are paid an hourly rate to complete set tasks. The more hours you work, the more money you earn.">
+              Salary</option>
+            <option value="Wages"
+              title="Similar to wages, this is money you earn from a job. Your annual salary is usually set out in a contract and paid either weekly, fortnightly or monthly. Usually the amount is regular and you won’t earn more for extra hours worked.">
+              Wages</option>
+            <option value="Commission"
+              title="Commission is where you earn money for completing a task. This is common in sales roles. You might earn a set amount of money for each sale you make or you might earn a percentage of a sale price for your work. Commission is based on results rather than time worked.">
+              Commission</option>
+            <option value="Selling something"
+              title="Maybe you’re handy with a needle and thread or you’re a gifted mathematician. You might have a tonne of stuff you don’t want anymore. Selling things you make, your skills as a service or stuff you own and no longer want are all potential ways to bring in some cash.">
+              Selling something</option>
+            <option value="Gifts"
+              title="Who doesn’t love a cash present? Birthdays and Christmas can be a great and sometimes unexpected source of income.">
+              Gifts</option>
+            <option value="Allowance"
+              title="Money your grown-ups give you on a regular basis. They may or may not expect you to do jobs in return for the moola.">
+              Allowance</option>
+            <option value="Government Payments"
+              title="Depending on your situation you may be eligible for assistance payments from the government.">
+              Government Payments</option>
+            <option value="Other" title="Other source of income">Other</option>
+          </select>`
+
+      break;
+      case 'Expences' : 
+                      newDiv.innerHTML = `<label class="text-2xl font-bold" for="Category">Choose Category :</label>
+                    <select class="text-lg bg-[#e2e2e2] py-2 pl-2 pr-5 rounded-md" name="Category" id="category">
+            <option value="Housing"
+              title="Rent or mortgage payments, property taxes, and homeowner's or renter's insurance.">Housing</option>
+            <option value="Utilities" title="Electricity, water, gas, internet, and phone bills.">Utilities</option>
+            <option value="Food" title="Groceries and meals prepared at home.">Food</option>
+            <option value="Transportation"
+              title="Car payments, fuel, public transit passes, maintenance, insurance, and parking fees.">
+              Transportation
+            </option>
+            <option value="Healthcare"
+              title="Insurance premiums, out-of-pocket medical costs, prescriptions, and dental care.">Healthcare
+            </option>
+            <option value="Debt Payments" title="Student loans, credit card payments, and other loans.">Debt Payments
+            </option>
+            <option value="Personal Care" title="Toiletries, haircuts, and grooming services.">Personal Care</option>
+            <option value="Clothing" title="New apparel and shoes.">Clothing</option>
+            <option value="Entertainment and Recreation" title="Streaming services, hobbies, movies, or dining out.">
+              Entertainment and Recreation</option>
+            <option value="Family and Pet Care" title="Childcare, pet food, and veterinary costs.">Family and Pet Care
+            </option>
+            <option value="Miscellaneous" title="Gifts, travel, household supplies, and other irregular costs.">
+              Miscellaneous</option>
+            <option value="Other" title="Other causes of expence">Other</option>
+          </select>`
+      break;
+      default : 
+              newDiv.innerHTML = ``;
+      break;
+    }
+})
 }
 

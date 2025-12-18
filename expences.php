@@ -233,11 +233,10 @@ if(!$_SESSION['validate']){
            </div>
           </div>
         </div>
-        <div class="w-full flex justify-around">
+        <div class="w-full flex justify-between px-16">
           <button id="addExpenceBtn" class="px-2 py-2 text-white font-bold text-xl bg-red-500 rounded-md xl:order-1 xl:text-2xl cursor-pointer">Add an
           expence</button>
           <button id="openCLModal" class="px-2 py-2 text-white font-bold text-xl bg-black rounded-md xl:order-1 xl:text-2xl cursor-pointer">Manage Category Limits</button>
-          <button id="openaddRTModal" class="px-2 py-2 text-white font-bold text-xl bg-black rounded-md xl:order-1 xl:text-2xl cursor-pointer">+ Add Recurring Transactions</button>
         </div>
           
        </div>
@@ -343,23 +342,7 @@ if(!$_SESSION['validate']){
                 </div>
                 </div>
     </section>
-    <section id="addRTModal" class="overlay w-full h-full fixed bg-black/20 backdrop-filter backdrop-blur-xs hidden justify-center items-center" aria-hidden="true">
-                <div class="w-[20%] py-4 bg-white rounded-md relative flex flex-col justify-center items-center">
-                  <button id="closeRTModal"
-        class="text-xl border-2 pt-1 px-1 rounded-xs font-bold cursor-pointer hover:bg-black hover:text-white self-end mr-10"><i
-          class="fi fi-sr-cross"></i></button>
-                <form class="flex flex-col w-[80%] h-full gap-5" action="" method="post">
-                  <label class="text-2xl font-bold" for="amount">Enter The Amount :</label>
-                  <input class="text-xl bg-[#e2e2e2] py-2 pl-2 rounded-md" type="number" name="amount" step="0.01" placeholder="Amount">
-                  <label class="text-2xl font-bold" for="type">Choose The Type :</label>
-                  <select class="text-xl bg-[#e2e2e2] py-2 pl-2 rounded-md" name="type" id="typeSelect">
-                    <option value="Incomes">Incomes</option>
-                    <option value="Expences">Expences</option>
-                  </select>
-                  <button class="text-2xl font-bold py-2 bg-black text-white rounded-md cursor-pointer" type="submit">ADD</button>
-                </form>
-                </div>
-    </section>
+    
   </main>
   <script src="script.js"></script>
 </body>

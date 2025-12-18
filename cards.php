@@ -119,7 +119,9 @@
         <div class="border rounded-md col-span-4 row-span-1 grid grid-cols-3 gap-5 p-5">
           <div class="border col-span-1 rounded-md">incomes</div>
           <div class="border col-span-1 rounded-md">expences</div>
-          <div class="border col-span-1 rounded-md">transactions</div>
+          <div class="border col-span-1 rounded-md px-2 pt-2">
+            <button id="openaddRTModal" class="py-1 px-1 bg-black text-white text-lg rounded-md font-bold cursor-pointer">+Add Reccuring Transactions</button>
+          </div>
         </div>
       </div>
     </div>
@@ -176,8 +178,29 @@
         class="text-xl border-2 pt-1 px-1 font-bold cursor-pointer absolute top-1 right-1 hover:bg-black hover:text-white"><i
           class="fi fi-sr-cross"></i></button>
     </div>
-
+      
   </section>
+  <section id="addRTModal" class="overlay w-full h-full fixed bg-black/20 backdrop-filter backdrop-blur-xs hidden justify-center items-center" aria-hidden="true">
+                <div class="w-[20%] py-4 bg-white rounded-md relative flex flex-col justify-center items-center">
+                  <button id="closeRTModal"
+        class="text-xl border-2 pt-1 px-1 rounded-xs font-bold cursor-pointer hover:bg-black hover:text-white self-end mr-10"><i
+          class="fi fi-sr-cross"></i></button>
+                <form class="flex flex-col w-[80%] h-full gap-5" action="" method="post">
+                  <label class="text-2xl font-bold" for="amount">Enter The Amount :</label>
+                  <input class="text-xl bg-[#e2e2e2] py-2 pl-2 rounded-md" type="number" name="amount" step="0.01" placeholder="Amount">
+                  <label class="text-2xl font-bold" for="type">Choose The Type :</label>
+                  <select class="text-xl bg-[#e2e2e2] py-2 pl-2 rounded-md" name="type" id="typeSelect">
+                    <option value="">Choose</option>
+                    <option value="Incomes">Incomes</option>
+                    <option value="Expences">Expences</option>
+                  </select>
+                  <div id="newDiv">
+                    
+                  </div>
+                  <button class="text-2xl font-bold py-2 bg-black text-white rounded-md cursor-pointer" type="submit">ADD</button>
+                </form>
+                </div>
+    </section>
   <script src="script.js"></script>
 </body>
 
