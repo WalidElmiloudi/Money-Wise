@@ -20,6 +20,22 @@ const sortBtn = document.getElementById("sortBtn");
 const filter = document.getElementById("filter");
 const sort = document.getElementById("sort");
 const clock = document.getElementById("clock");
+const addCard = document.getElementById("addCard");
+const allCards = document.getElementById("allCards");
+const closeCardModal = document.getElementById("closeCardModal")
+const addCardModal = document.getElementById("addCardModal");
+const closeCardDisplayModal = document.getElementById("closeCardDisplayModal");
+const displayCardModal = document.getElementById("displayCardsModal");
+const openCategoryLimitModal = document.getElementById("openCLModal");
+const categoryLimitsModal = document.getElementById("categoryLimitsModal");
+const closeCLModal = document.getElementById("closeCLModal");
+const addCategoryLimit = document.getElementById("addCategoryLimit");
+const addCategoryLimitModal = document.getElementById("addCLModal");
+const closeaddCLModal = document.getElementById("closeaddCLModal");
+const openaddRTModal = document.getElementById("openaddRTModal");
+const addRTModal = document.getElementById("addRTModal");
+const closeRTModal = document.getElementById("closeRTModal");
+const typeSelect = document.getElementById("typeSelect;")
 
 if (openLoginModal) {
   openLoginModal.addEventListener("click", () => {
@@ -86,7 +102,56 @@ if (addExpenceBtn) {
     expenceModal.setAttribute("aria-hidden", "true");
   })
 }
-
+if (addCard) {
+  addCard.addEventListener("click", () => {
+    addCardModal.classList.replace("hidden", "flex");
+    addCardModal.removeAttribute("aria-hidden");
+  })
+  closeCardModal.addEventListener("click", () => {
+    addCardModal.classList.replace("flex","hidden" );
+    addCardModal.setAttribute("aria-hidden","true");
+  })
+}
+if (allCards) {
+  allCards.addEventListener("click", () => {
+    displayCardModal.classList.replace("hidden", "flex");
+    displayCardModal.removeAttribute("aria-hidden");
+  })
+  closeCardDisplayModal.addEventListener("click", () => {
+    displayCardModal.classList.replace("flex","hidden" );
+    displayCardModal.setAttribute("aria-hidden","true");
+  })
+}
+if (openCategoryLimitModal) {
+  openCategoryLimitModal.addEventListener("click", () => {
+    categoryLimitsModal.classList.replace("hidden", "flex");
+    categoryLimitsModal.removeAttribute("aria-hidden");
+  })
+  closeCLModal.addEventListener("click", () => {
+    categoryLimitsModal.classList.replace("flex","hidden" );
+    categoryLimitsModal.setAttribute("aria-hidden","true");
+  })
+}
+if (addCategoryLimit) {
+  addCategoryLimit.addEventListener("click", () => {
+    addCategoryLimitModal.classList.replace("hidden", "flex");
+    addCategoryLimitModal.removeAttribute("aria-hidden");
+  })
+  closeaddCLModal.addEventListener("click", () => {
+    addCategoryLimitModal.classList.replace("flex","hidden" );
+    addCategoryLimitModal.setAttribute("aria-hidden","true");
+  })
+}
+if (openaddRTModal) {
+  openaddRTModal.addEventListener("click", () => {
+    addRTModal.classList.replace("hidden", "flex");
+    addRTModal.removeAttribute("aria-hidden");
+  })
+  closeRTModal.addEventListener("click", () => {
+    addRTModal.classList.replace("flex","hidden" );
+    addRTModal.setAttribute("aria-hidden","true");
+  })
+}
 function deleteModal(id,table){
   console.log(id,table);
    const newSection = document.createElement("section");
@@ -185,5 +250,4 @@ updateTime();
 
 setInterval(updateTime, 1000);
 }
-
 

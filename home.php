@@ -34,7 +34,7 @@ if(!$_SESSION['validate']){
   <section id="home" class="grid w-full h-full px-5 xl:px-2 grid-rows-8 xl:grid-cols-8 2xl:grid-cols-12 gap-2 xl:gap-4">
 
     <div class="xl:order-1 hidden xl:flex row-span-8 col-span-2 2xl:col-span-2 bg-white">
-       <div class="hidden w-[30%] bg-white h-full xl:flex flex-col justify-center gap-15 pl-10">
+       <div class="hidden w-[30%] bg-white h-full xl:flex flex-col justify-center gap-10 pl-10">
       <h1 class=" text-4xl font-bold text-white bg-gray-800 rounded-full  px-4 py-2 w-fit "><a href="#">Home</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b]  px-4 py-2 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="dashboard.php">Dashboard</a></h1>
         <div class="w-full">

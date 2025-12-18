@@ -18,7 +18,10 @@ $result->execute([':email' => $email]);
     $_SESSION['verification_code'] = random_int(100000,999999);
 
 require 'vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 $mail = new PHPMailer(true);
 

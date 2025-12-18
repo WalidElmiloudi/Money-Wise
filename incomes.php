@@ -23,6 +23,8 @@ if(!$_SESSION['validate']){
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-chubby/css/uicons-solid-chubby.css'>
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+
 </head>
 
 <body class="w-full h-screen flex flex-col bg-slate-100 font-['open_sans'] text-[#021c3b]">
@@ -47,17 +49,33 @@ if(!$_SESSION['validate']){
     </div>
   </section>
   <main class="w-full h-full flex flex-col xl:flex-row gap-4">
-    <div class="hidden w-[30%] bg-white h-full xl:flex flex-col justify-center gap-20 pl-10">
+    <div class="hidden w-[30%] bg-white h-full xl:flex flex-col justify-center gap-10 pl-10">
       <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="home.php">Home</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="dashboard.php">Dashboard</a></h1>
-        <h1 class=" text-4xl font-bold rounded-full py-2 px-4 w-fit bg-gray-800 text-white"><a href="#">Incomes</a></h1>
-        <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="expences.php">Expences</a></h1>
+        <div class="w-full">
+        <h1 class=" text-4xl font-bold  px-4 py-2 w-fit text-white bg-gray-800 rounded-full"><a
+            href="#.php">Payements</a></h1>
+        <div class="flex flex-col h-full items-start gap-2 py-2">
+          <h2
+            class=" text-2xl font-bold text-gray-500 pl-10  px-4 py-2 w-fit  hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 ">
+            <a href="cards.php"> Bank Cards</a>
+          </h2>
+          <h2
+            class="text-2xl font-bold   px-4 py-2 pl-10 w-fit   scale-110 text-gray-800 rounded-full">
+            <a href="#"> Incomes</a>
+          </h2>
+          <h2
+            class="text-2xl font-bold text-gray-500 pl-10  px-4 py-2 w-fit  hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 ">
+            <a href="expences.php"> Expences</a>
+          </h2>
+        </div>
+      </div>
       <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="account.php">Account</a></h1>
  <hr class="w-50 border-2">
       <h1 class="text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white flex items-center justify-center cursor-pointer"><i class="fi fi-rs-sign-out-alt"></i><a href="logout.php">LOGOUT</a></h1>    </div>
     <div class ="w-full h-full bg-[#f2f4f7] flex justify-center items-center">
        <div class = "w-[90%] h-[90%] bg-white rounded-lg flex flex-col justify-center gap-2 items-center p-4">
-        <div class="w-full h-full flex flex-row items-center justify-between xl:px-10">
+        <div class="w-full flex flex-row items-center justify-between xl:px-10">
           <h1 class="text-3xl  xl:text-4xl text-[#021c3b] font-bold self-start">Incomes</h1>
           <div class="relative 2xl:hidden">
             <i id="sortBtn" class="fi fi-br-bars-sort"></i>
@@ -203,9 +221,8 @@ if(!$_SESSION['validate']){
                     }
                 } else {
                     $result = $conn->query("SELECT * FROM incomes join users on incomes.userID = users.id");
-                    if ($result->num_rows > 0) {
                       unset($_SESSION['backup']);
-                        while ($income = $result->fetch_assoc()) {
+                        while ($income = $result->fetch(PDO::FETCH_ASSOC)) {
                           $_SESSION['backup'][]=$income;
                             $id = $income['id'];
                         ?>
@@ -222,7 +239,7 @@ if(!$_SESSION['validate']){
             edit
         </button>
             </div>
-            <?php }
+            <?php
                         
                     }
                 }
@@ -235,8 +252,12 @@ if(!$_SESSION['validate']){
            </div>
           </div>
         </div>
+        <div class="w-full flex justify-between px-16">
           <button id="addIncome" class="py-1 px-2 text-white font-bold text-xl bg-blue-500 rounded-md xl:order-1 xl:text-2xl cursor-pointer">Add an
           income</button>
+          <button id="openaddRTModal" class="px-2 py-2 text-white font-bold text-xl bg-black rounded-md xl:order-1 xl:text-2xl cursor-pointer">+ Add Recurring Transactions</button>
+        </div>
+          
        </div>
 
     </div>
@@ -286,6 +307,23 @@ if(!$_SESSION['validate']){
         <button id="closeIncomeModal"
           class="w-10 h-10 bg-red-500 text-white text-xl font-bold rounded-full absolute -top-2 -right-2 xl:text-2xl cursor-pointer">X</button>
       </div>
+    </section>
+    <section id="addRTModal" class="overlay w-full h-full fixed bg-black/20 backdrop-filter backdrop-blur-xs hidden justify-center items-center" aria-hidden="true">
+                <div class="w-[20%] py-4 bg-white rounded-md relative flex flex-col justify-center items-center">
+                  <button id="closeRTModal"
+        class="text-xl border-2 pt-1 px-1 rounded-xs font-bold cursor-pointer hover:bg-black hover:text-white self-end mr-10"><i
+          class="fi fi-sr-cross"></i></button>
+                <form class="flex flex-col w-[80%] h-full gap-5" action="" method="post">
+                  <label class="text-2xl font-bold" for="amount">Enter The Amount :</label>
+                  <input class="text-xl bg-[#e2e2e2] py-2 pl-2 rounded-md" type="number" name="amount" step="0.01" placeholder="Amount">
+                  <label class="text-2xl font-bold" for="type">Choose The Type :</label>
+                  <select class="text-xl bg-[#e2e2e2] py-2 pl-2 rounded-md" name="type" id="typeSelect">
+                    <option value="Incomes">Incomes</option>
+                    <option value="Expences">Expences</option>
+                  </select>
+                  <button class="text-2xl font-bold py-2 bg-black text-white rounded-md cursor-pointer" type="submit">ADD</button>
+                </form>
+                </div>
     </section>
   </main>
   <script src="script.js"></script>

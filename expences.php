@@ -23,6 +23,7 @@ if(!$_SESSION['validate']){
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-chubby/css/uicons-solid-chubby.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
 </head>
 
 <body class="w-full h-screen flex flex-col bg-slate-100 font-['open_sans']">
@@ -47,11 +48,27 @@ if(!$_SESSION['validate']){
     </div>
   </section>
   <main id="expences" class="w-full h-full flex flex-col xl:flex-row  gap-4">
-    <div class="hidden w-[30%] bg-white h-full xl:flex flex-col justify-center gap-20 pl-10">
+    <div class="hidden w-[30%] bg-white h-full xl:flex flex-col justify-center gap-10 pl-10">
       <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="home.php">Home</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="dashboard.php">Dashboard</a></h1>
-        <h1 class=" text-4xl font-bold  py-2 px-4 w-fit  hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="incomes.php">Incomes</a></h1>
-        <h1 class=" text-4xl font-bold text-white bg-gray-800 rounded-full py-2 px-4 w-fit"><a href="#">Expences</a></h1>
+        <div class="w-full">
+        <h1 class=" text-4xl font-bold  px-4 py-2 w-fit text-white bg-gray-800 rounded-full"><a
+            href="#.php">Payements</a></h1>
+        <div class="flex flex-col h-full items-start gap-2 py-2">
+          <h2
+            class=" text-2xl font-bold text-gray-500 pl-10  px-4 py-2 w-fit  hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 ">
+            <a href="cards.php"> Bank Cards</a>
+          </h2>
+          <h2
+            class=" text-2xl font-bold text-gray-500 pl-10 px-4 py-2 w-fit   hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 ">
+            <a href="incomes.php"> Incomes</a>
+          </h2>
+          <h2
+            class="text-2xl font-bold   px-4 py-2 pl-10 w-fit   scale-110 text-gray-800 rounded-full">
+            <a href="#"> Expences</a>
+          </h2>
+        </div>
+      </div>
       <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="account.php">Account</a></h1>
  <hr class="w-50 border-2">
       <h1 class="text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white flex items-center justify-center cursor-pointer"><i class="fi fi-rs-sign-out-alt"></i><a href="logout.php">LOGOUT</a></h1>    </div>
@@ -188,9 +205,8 @@ if(!$_SESSION['validate']){
           }
             } else{        
               $result = $conn->query("SELECT * FROM expences join users on expences.userID = users.id");
-              if ($result->num_rows > 0) {
                 unset($_SESSION['backup']);
-                  while ($income = $result->fetch_assoc()) {
+                  while ($income = $result->fetch(PDO::FETCH_ASSOC)) {
                     $_SESSION['backup'][] = $income;
                       $id = $income['id'];
                   ?>
@@ -208,7 +224,7 @@ if(!$_SESSION['validate']){
         </button>
             </div>
             <?php }
-                }}
+                }
                 if(isset($_SESSION['filteredArray'])){
                   $_SESSION['backup'] = $_SESSION['filteredArray'];
                 }
@@ -217,8 +233,13 @@ if(!$_SESSION['validate']){
            </div>
           </div>
         </div>
-          <button id="addExpenceBtn" class="px-2 py-1 text-white font-bold text-xl bg-red-500 rounded-md xl:order-1 xl:text-2xl cursor-pointer">Add an
+        <div class="w-full flex justify-around">
+          <button id="addExpenceBtn" class="px-2 py-2 text-white font-bold text-xl bg-red-500 rounded-md xl:order-1 xl:text-2xl cursor-pointer">Add an
           expence</button>
+          <button id="openCLModal" class="px-2 py-2 text-white font-bold text-xl bg-black rounded-md xl:order-1 xl:text-2xl cursor-pointer">Manage Category Limits</button>
+          <button id="openaddRTModal" class="px-2 py-2 text-white font-bold text-xl bg-black rounded-md xl:order-1 xl:text-2xl cursor-pointer">+ Add Recurring Transactions</button>
+        </div>
+          
        </div>
        
     </div>
@@ -268,6 +289,76 @@ if(!$_SESSION['validate']){
         <button id="closeExpenceModal"
           class="w-10 h-10 bg-red-500 text-white text-xl font-bold rounded-full absolute -top-2 -right-2 xl:text-2xl cursor-pointer">X</button>
       </div>
+    </section>
+    <section id="categoryLimitsModal" class="overlay fixed w-full h-full bg-black/20 backdrop-filter backdrop-blur-xs hidden justify-center items-center" aria-hidden="true">
+                <div class="w-[45%] h-[60%] bg-white rounded-md flex flex-col items-center pt-4 gap-4">
+                  <div class="w-[85%] flex justify-between">
+                    <h1 class="text-3xl font-bold">Category Limits</h1>
+                    <button id="closeCLModal"
+        class="text-xl border-2 pt-1 px-1 rounded-xs font-bold cursor-pointer hover:bg-black hover:text-white"><i
+          class="fi fi-sr-cross"></i></button>
+                  </div>
+                  <div class="w-[85%] h-[80%] bg-[#f7f7f7]">
+                  </div>
+                  <button id="addCategoryLimit" class="py-1 px-2 bg-black text-2xl text-white font-bold rounded-md cursor-pointer">+ Add Category Limit</button>
+                </div>
+                <div id="addCLModal" class="overlay w-full h-full bg-black/40 backdrop-filter backdrop-blur-xs fixed hidden justify-center items-center" aria-hidden="true">
+                <div class="w-[30%] h-[40%] bg-white rounded-md flex flex-col items-center gap-4 py-3">
+                  <div class="w-[85%] flex justify-between px-3">
+                    <h1 class="text-3xl font-bold">Add Category Limit</h1>
+                    <button id="closeaddCLModal"
+        class="text-xl border-2 pt-1 px-1 rounded-xs font-bold cursor-pointer hover:bg-black hover:text-white"><i
+          class="fi fi-sr-cross font-bold text-xl"></i></button>
+                  </div>
+                  <form class="flex flex-col w-[80%] gap-4" action="" method="post">
+                    <label class="text-2xl font-bold " for="Category">Choose Category :</label>
+                    <select class="py-3 px-4 w-full bg-[#e9e9e9] rounded-md text-2xl" name="Category" id="category">
+            <option value="Housing"
+              title="Rent or mortgage payments, property taxes, and homeowner's or renter's insurance.">Housing</option>
+            <option value="Utilities" title="Electricity, water, gas, internet, and phone bills.">Utilities</option>
+            <option value="Food" title="Groceries and meals prepared at home.">Food</option>
+            <option value="Transportation"
+              title="Car payments, fuel, public transit passes, maintenance, insurance, and parking fees.">
+              Transportation
+            </option>
+            <option value="Healthcare"
+              title="Insurance premiums, out-of-pocket medical costs, prescriptions, and dental care.">Healthcare
+            </option>
+            <option value="Debt Payments" title="Student loans, credit card payments, and other loans.">Debt Payments
+            </option>
+            <option value="Personal Care" title="Toiletries, haircuts, and grooming services.">Personal Care</option>
+            <option value="Clothing" title="New apparel and shoes.">Clothing</option>
+            <option value="Entertainment and Recreation" title="Streaming services, hobbies, movies, or dining out.">
+              Entertainment and Recreation</option>
+            <option value="Family and Pet Care" title="Childcare, pet food, and veterinary costs.">Family and Pet Care
+            </option>
+            <option value="Miscellaneous" title="Gifts, travel, household supplies, and other irregular costs.">
+              Miscellaneous</option>
+            <option value="Other" title="Other causes of expence">Other</option>
+          </select>
+          <label class="text-2xl font-bold " for="limitAmount">Enter The Limit :</label>
+          <input class="py-3 px-4 w-full bg-[#e9e9e9] rounded-md text-2xl" type="number" step="0.01" placeholder="Amount">
+          <button class="py-2 text-3xl font-bold bg-black text-white rounded-md" type="submit">ADD</button>
+                  </form>
+                </div>
+                </div>
+    </section>
+    <section id="addRTModal" class="overlay w-full h-full fixed bg-black/20 backdrop-filter backdrop-blur-xs hidden justify-center items-center" aria-hidden="true">
+                <div class="w-[20%] py-4 bg-white rounded-md relative flex flex-col justify-center items-center">
+                  <button id="closeRTModal"
+        class="text-xl border-2 pt-1 px-1 rounded-xs font-bold cursor-pointer hover:bg-black hover:text-white self-end mr-10"><i
+          class="fi fi-sr-cross"></i></button>
+                <form class="flex flex-col w-[80%] h-full gap-5" action="" method="post">
+                  <label class="text-2xl font-bold" for="amount">Enter The Amount :</label>
+                  <input class="text-xl bg-[#e2e2e2] py-2 pl-2 rounded-md" type="number" name="amount" step="0.01" placeholder="Amount">
+                  <label class="text-2xl font-bold" for="type">Choose The Type :</label>
+                  <select class="text-xl bg-[#e2e2e2] py-2 pl-2 rounded-md" name="type" id="typeSelect">
+                    <option value="Incomes">Incomes</option>
+                    <option value="Expences">Expences</option>
+                  </select>
+                  <button class="text-2xl font-bold py-2 bg-black text-white rounded-md cursor-pointer" type="submit">ADD</button>
+                </form>
+                </div>
     </section>
   </main>
   <script src="script.js"></script>

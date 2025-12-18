@@ -30,6 +30,24 @@ id INT PRIMARY KEY AUTO_INCREMENT,
 user_id INT,
 statut ENUM('main','secondary'),
 balance DECIMAL(10,2),
-bank_name VARCHAR(20)
+bank_name VARCHAR(20),
+card_number INT,
+expiration_date DATE,
+CCV INT
 );
 
+CREATE TABLE IF NOT EXISTS category_limits(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  category VARCHAR(30),
+  limit_amount DECIMAL(10,2),
+  amount DECIMAL(10,2)
+)
+
+
+CREATE TABLE IF NOT EXISTS recurring_transactions(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  user_ID INT,
+  amount DECIMAL(10,2),
+  type ENUM('incomes','expences'),
+  category VARCHAR(30)
+)
