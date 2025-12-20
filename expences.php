@@ -204,22 +204,22 @@ if(!$_SESSION['validate']){
             <?php  
           }
             } else{        
-              $result = $conn->query("SELECT * FROM expences join users on expences.userID = users.id");
+              $result = $conn->query("SELECT e.* FROM expences e join cards c on e.card_id = c.id WHERE c.user_id = {$_SESSION['userID']} AND c.statut = 'main'");
                 unset($_SESSION['backup']);
-                  while ($income = $result->fetch(PDO::FETCH_ASSOC)) {
-                    $_SESSION['backup'][] = $income;
-                      $id = $income['id'];
+                  while ($expence = $result->fetch(PDO::FETCH_ASSOC)) {
+                    $_SESSION['backup'][] = $expence;
+                      $id = $expence['id'];
                   ?>
-            <div class="col-span-2 text-green-600  text-[8px] xl:text-base 2xl:text-xl text-start font-bold border-b border-black  p-1 break-words"><?php echo $income['montant'] ?>$</div>
-            <div class="col-span-2  text-[8px] xl:text-base 2xl:text-xl text-start font-bold border-b border-black  p-1 break-words flex justify-center"><?php echo $income['category'] ?></div>
-            <div class="col-span-2  text-[7px] xl:text-base 2xl:text-xl text-start font-bold border-b border-black  p-1 break-words "><?php echo $income['description'] ?></div>
-            <div class="col-span-2  text-[8px] xl:text-base 2xl:text-xl text-start font-bold border-b border-black  p-1 break-words flex items-center justify-center"><?php echo $income['date'] ?></div>
+            <div class="col-span-2 text-green-600  text-[8px] xl:text-base 2xl:text-xl text-start font-bold border-b border-black  p-1 break-words"><?php echo $expence['montant'] ?>$</div>
+            <div class="col-span-2  text-[8px] xl:text-base 2xl:text-xl text-start font-bold border-b border-black  p-1 break-words flex justify-center"><?php echo $expence['category'] ?></div>
+            <div class="col-span-2  text-[7px] xl:text-base 2xl:text-xl text-start font-bold border-b border-black  p-1 break-words "><?php echo $expence['description'] ?></div>
+            <div class="col-span-2  text-[8px] xl:text-base 2xl:text-xl text-start font-bold border-b border-black  p-1 break-words flex items-center justify-center"><?php echo $expence['date'] ?></div>
             <div class="col-span-2  text-start font-bold border-b border-black  p-1 break-words flex justify-center xl:justify-around gap-1">
               <button id="btn" onclick="deleteModal(<?php echo $id ?>,'expences')"
             class=" text-red-500 font-bold text-[7px] xl:text-base 2xl:text-xl cursor-pointer">
             delete
         </button>
-        <button onclick="editModal(<?php echo $id ?>,<?php echo $income['montant'] ?>,'<?php echo $income['description'] ?>','expences','<?php echo $row['category'] ?>')" class="text-green-500 font-bold text-[7px] xl:text-base 2xl:text-xl  cursor-pointer">
+        <button onclick="editModal(<?php echo $id ?>,<?php echo $expence['montant'] ?>,'<?php echo $expence['description'] ?>','expences','<?php echo $row['category'] ?>')" class="text-green-500 font-bold text-[7px] xl:text-base 2xl:text-xl  cursor-pointer">
             edit
         </button>
             </div>
@@ -290,14 +290,28 @@ if(!$_SESSION['validate']){
       </div>
     </section>
     <section id="categoryLimitsModal" class="overlay fixed w-full h-full bg-black/20 backdrop-filter backdrop-blur-xs hidden justify-center items-center" aria-hidden="true">
-                <div class="w-[45%] h-[60%] bg-white rounded-md flex flex-col items-center pt-4 gap-4">
-                  <div class="w-[85%] flex justify-between">
+                <div class="w-180 h-150 bg-white rounded-md flex flex-col items-center pt-4 gap-4">
+                  <div class="w-[90%] flex justify-between">
                     <h1 class="text-3xl font-bold">Category Limits</h1>
                     <button id="closeCLModal"
         class="text-xl border-2 pt-1 px-1 rounded-xs font-bold cursor-pointer hover:bg-black hover:text-white"><i
           class="fi fi-sr-cross"></i></button>
                   </div>
-                  <div class="w-[85%] h-[80%] bg-[#f7f7f7]">
+                  <div class="w-[90%] h-[80%] bg-[#e2e2e2] flex flex-col pt-2 items-center gap-2 overflow-y-auto [scrollbar-width:none] scroll-smooth rounded-md">
+                    <?php
+
+                    $pdo = $conn->query("SELECT * FROM category_limits c WHERE c.user_id = {$_SESSION['userID']} ");
+                    $results = $pdo->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($results as $result){
+
+                      ?>
+                      <div class="w-[90%] h-15 shrink-0 bg-white rounded-md flex items-center  justify-around">
+                         <h1 class="text-2xl font-bold">Category : <span class="text-base"><?= $result['category'] ?></span></h1>
+                         <h1 class="text-2xl font-bold">Limit : <span class="text-green-400 text-base"><?= $result['limit_amount'] ?> $</span></h1>
+                      </div>
+                      <?php
+                    }
+                    ?>
                   </div>
                   <button id="addCategoryLimit" class="py-1 px-2 bg-black text-2xl text-white font-bold rounded-md cursor-pointer">+ Add Category Limit</button>
                 </div>
@@ -309,7 +323,7 @@ if(!$_SESSION['validate']){
         class="text-xl border-2 pt-1 px-1 rounded-xs font-bold cursor-pointer hover:bg-black hover:text-white"><i
           class="fi fi-sr-cross font-bold text-xl"></i></button>
                   </div>
-                  <form class="flex flex-col w-[80%] gap-4" action="" method="post">
+                  <form class="flex flex-col w-[80%] gap-4" action="category_limit_handler.php" method="post">
                     <label class="text-2xl font-bold " for="Category">Choose Category :</label>
                     <select class="py-3 px-4 w-full bg-[#e9e9e9] rounded-md text-2xl" name="Category" id="category">
             <option value="Housing"
@@ -336,14 +350,41 @@ if(!$_SESSION['validate']){
             <option value="Other" title="Other causes of expence">Other</option>
           </select>
           <label class="text-2xl font-bold " for="limitAmount">Enter The Limit :</label>
-          <input class="py-3 px-4 w-full bg-[#e9e9e9] rounded-md text-2xl" type="number" step="0.01" placeholder="Amount">
-          <button class="py-2 text-3xl font-bold bg-black text-white rounded-md" type="submit">ADD</button>
+          <input class="py-3 px-4 w-full bg-[#e9e9e9] rounded-md text-2xl" name="limitAmount" type="number" step="0.01" placeholder="Amount">
+          <button class="py-2 text-3xl font-bold bg-black text-white rounded-md cursor-pointer" type="submit">ADD</button>
                   </form>
                 </div>
                 </div>
     </section>
-    
   </main>
+  <div id="toatContainer" class="fixed w-80 right-0 h-full lex flex-col pt-2">
+                    
+    </div>
+  <?php
+  if(isset($_SESSION['message'])){
+    ?>
+    <script>
+    function toast(message){
+      const toastContainer = document.getElementById("toatContainer");
+      const toast = document.createElement("div");
+      toast.innerHTML = `
+      <div class="w-[90%] h-20 rounded-md bg-red-500 flex items-center p-2 shadow-lg">
+                      <h1 class="text-white text-xl font-bold">
+    ${message}
+                      </h1>
+                    </div>
+      `;
+      toastContainer.appendChild(toast);
+      setTimeout(() => {
+        toastContainer.removeChild(toast);
+      },3000);
+    }
+    toast("<?= $_SESSION['message'] ?>");
+  </script>
+  <?php
+  unset($_SESSION['message']);
+  }
+  ?>
   <script src="script.js"></script>
 </body>
 </html>

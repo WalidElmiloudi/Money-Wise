@@ -35,6 +35,9 @@ const closeaddCLModal = document.getElementById("closeaddCLModal");
 const openaddRTModal = document.getElementById("openaddRTModal");
 const addRTModal = document.getElementById("addRTModal");
 const closeRTModal = document.getElementById("closeRTModal");
+const openRTDModal = document.getElementById("openRTDModal");
+const RecurringTransactionsModal = document.getElementById("RTDisplayModal");
+const closeRTDModal = document.getElementById("closeRTDModal");
 const typeSelect = document.getElementById("typeSelect")
 
 if (openLoginModal) {
@@ -150,6 +153,16 @@ if (openaddRTModal) {
   closeRTModal.addEventListener("click", () => {
     addRTModal.classList.replace("flex","hidden" );
     addRTModal.setAttribute("aria-hidden","true");
+  })
+}
+if (openRTDModal) {
+  openRTDModal.addEventListener("click", () => {
+    RecurringTransactionsModal.classList.replace("hidden", "flex");
+    RecurringTransactionsModal.removeAttribute("aria-hidden");
+  })
+  closeRTDModal.addEventListener("click", () => {
+    RecurringTransactionsModal.classList.replace("flex","hidden" );
+    RecurringTransactionsModal.setAttribute("aria-hidden","true");
   })
 }
 function deleteModal(id,table){
@@ -286,7 +299,7 @@ if(typeSelect){
       break;
       case 'Expences' : 
                       newDiv.innerHTML = `<label class="text-2xl font-bold" for="Category">Choose Category :</label>
-                    <select class="text-lg bg-[#e2e2e2] py-2 pl-2 pr-5 rounded-md" name="Category" id="category">
+                    <select class="text-lg bg-[#e2e2e2] py-2 pl-2 pr-5 rounded-md" name="category" id="category">
             <option value="Housing"
               title="Rent or mortgage payments, property taxes, and homeowner's or renter's insurance.">Housing</option>
             <option value="Utilities" title="Electricity, water, gas, internet, and phone bills.">Utilities</option>

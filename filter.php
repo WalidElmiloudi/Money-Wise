@@ -1,11 +1,10 @@
 <?php
 
 require 'config.php';
-session_start();
 $category = $_POST['category'];
 $date     = $_POST['date'];
 $table    = $_GET['target'];
-$userID = $_SESSION['userId'];
+$userID = $_SESSION['userID'];
 
 $_SESSION['category'] = $category;
 $_SESSION['date'] = $date;
@@ -17,55 +16,55 @@ if ($category != "All") {
         switch ($date) {
             case "CURMONTH":$date = date('m');
             $currentYear = date('Y');
-                $result               = $conn->query("SELECT * FROM $table  join users on $table.userID = users.id WHERE category = '$category' AND (MONTH(date) = $date AND YEAR(date) = $currentYear)");
-                if ($result->num_rows > 0) {
-                    while ($filtered = $result->fetch_assoc()) {
-                        $_SESSION['filteredArray'][] = $filtered;
-                    }
-                }
+                           $result= $conn->query("SELECT * FROM $table t  join cards c on t.card_id = c.id WHERE c.user_id = $userID AND category = '$category' AND (MONTH(t.date) = $date AND YEAR(t.date) = $currentYear) AND c.statut='main'");
+                        $_SESSION['filteredArray']=$result->fetchAll(PDO::FETCH_ASSOC);
                 break;
             case "LASMONTH":$date = (date('m') == 01?12:date('m')-1);
-            $currentYear = date('Y');
-                $result               = $conn->query("SELECT * FROM $table  join users on $table.userID = users.id WHERE category = '$category' AND (MONTH(date) = $date AND YEAR(date) = $currentYear)");
-                if ($result->num_rows > 0) {
-                    while ($filtered = $result->fetch_assoc()) {
-                        $_SESSION['filteredArray'][] = $filtered;
-                    }
-                }
+            $currentYear = ($date == 12?date('Y')-1:date('Y'));
+                           $result= $conn->query("SELECT * FROM $table t  join cards c on t.card_id = c.id WHERE c.user_id = $userID AND category = '$category' AND (MONTH(t.date) = $date AND YEAR(t.date) = $currentYear) AND c.statut='main'");
+                $_SESSION['filteredArray']=$result->fetchAll(PDO::FETCH_ASSOC);
                 break;
             case "CURYEAR":$date = date('Y');
-                $result               = $conn->query("SELECT * FROM $table  join users on $table.userID = users.id WHERE category = '$category' AND YEAR(date) = $date");
-                if ($result->num_rows > 0) {
-                    while ($filtered = $result->fetch_assoc()) {
-                        $_SESSION['filteredArray'][] = $filtered;
-                    }
-                }
+                                   $result= $conn->query("SELECT * FROM $table t  join cards c on t.card_id = c.id WHERE c.user_id = $userID AND category = '$category' AND YEAR(t.date) = $date AND c.statut='main'");
+                $_SESSION['filteredArray']=$result->fetchAll(PDO::FETCH_ASSOC);
                 break;
-            case "LASTYEAR":$date = date('Y') - 1;
-            $result               = $conn->query("SELECT * FROM $table  join users on $table.userID = users.id WHERE category = '$category' AND YEAR(date) = $date");
-                if ($result->num_rows > 0) {
-                    while ($filtered = $result->fetch_assoc()) {
-                        $_SESSION['filteredArray'][] = $filtered;
-                    }
-                }
+            case "LASYEAR":$date = date('Y')-1;
+                                   $result= $conn->query("SELECT * FROM $table t  join cards c on t.card_id = c.id WHERE c.user_id = $userID AND category = '$category' AND YEAR(t.date) = $date AND c.statut='main'");
+                $_SESSION['filteredArray']=$result->fetchAll(PDO::FETCH_ASSOC);
                 break;
         }
     } else{
-       $result = $conn->query("SELECT * FROM $table  join users on $table.userID = users.id WHERE category = '$category'");
-    if($result->num_rows>0){
-      while($filtered = $result->fetch_assoc()){
-        $_SESSION['filteredArray'][]=$filtered;
-      }
-    }
+       $result = $conn->query("SELECT * FROM $table t  join cards c on t.card_id = c.id WHERE c.user_id = $userID AND category = '$category' AND c.statut='main'");
+      $_SESSION['filteredArray']=$result->fetchAll(PDO::FETCH_ASSOC);
     }
 
 } else {
-    $result = $conn->query("SELECT * FROM $table  join users on $table.userID = users.id");
-    if ($result->num_rows > 0) {
-        while ($filtered = $result->fetch_assoc()) {
-            $_SESSION['filteredArray'][] = $filtered;
+    if ($date != "All") {
+        switch ($date) {
+            case "CURMONTH":$date = date('m');
+            $currentYear = date('Y');
+                           $result= $conn->query("SELECT * FROM $table t  join cards c on t.card_id = c.id WHERE c.user_id = $userID  AND (MONTH(t.date) = $date AND YEAR(t.date) = $currentYear) AND c.statut='main'");
+                        $_SESSION['filteredArray']=$result->fetchAll(PDO::FETCH_ASSOC);
+                break;
+            case "LASMONTH":$date = (date('m') == 01?12:date('m')-1);
+            $currentYear = ($date == 12?date('Y')-1:date('Y'));
+                           $result= $conn->query("SELECT * FROM $table t  join cards c on t.card_id = c.id WHERE c.user_id = $userID  AND (MONTH(t.date) = $date AND YEAR(t.date) = $currentYear) AND c.statut='main'");
+                $_SESSION['filteredArray']=$result->fetchAll(PDO::FETCH_ASSOC);
+                break;
+            case "CURYEAR":$date = date('Y');
+                                   $result= $conn->query("SELECT * FROM $table t  join cards c on t.card_id = c.id WHERE c.user_id = $userID  AND YEAR(t.date) = $date AND c.statut='main'");
+                $_SESSION['filteredArray']=$result->fetchAll(PDO::FETCH_ASSOC);
+                break;
+            case "LASYEAR":$date = date('Y')-1;
+                                   $result= $conn->query("SELECT * FROM $table t  join cards c on t.card_id = c.id WHERE c.user_id = $userID  AND YEAR(t.date) = $date AND c.statut='main'");
+                $_SESSION['filteredArray']=$result->fetchAll(PDO::FETCH_ASSOC);
+                break;
         }
+    } else{
+       $result = $conn->query("SELECT * FROM $table t  join cards c on t.card_id = c.id WHERE c.user_id = $userID  AND c.statut='main'");
+      $_SESSION['filteredArray']=$result->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 }
 header("Location: $table.php");
 exit;

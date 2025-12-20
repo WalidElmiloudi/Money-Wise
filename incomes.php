@@ -220,7 +220,7 @@ if(!$_SESSION['validate']){
             <?php
                     }
                 } else {
-                    $result = $conn->query("SELECT * FROM incomes join users on incomes.userID = users.id");
+                    $result = $conn->query("SELECT i.* FROM incomes i join cards c on i.card_id = c.id WHERE c.user_id = {$_SESSION['userID']} AND c.statut = 'main'");
                       unset($_SESSION['backup']);
                         while ($income = $result->fetch(PDO::FETCH_ASSOC)) {
                           $_SESSION['backup'][]=$income;

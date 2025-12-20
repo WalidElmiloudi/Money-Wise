@@ -1,20 +1,16 @@
 <?php
 
-session_start();
-
-$host     = "localhost";
-$user     = "root";
-$password = "";
-$db       = "smart_wallet";
-
-$conn = new mysqli($host, $user, $password, $db);
+require 'config.php';
 
 $amount = $_POST['amount'];
 $type = $_POST['category'];
 $description = $_POST['description'];
-$userID = $_SESSION['userId'];
+$userID = $_SESSION['userID'];
 
-$conn->query("INSERT INTO expences (montant,description,category,userID) VALUES ('$amount','$description','$type','$userID')");
+$pdo = $conn->query("SELECT c.id FROM cards c JOIN users u WHERE c.user_id = {$_SESSION['userID']} AND c.statut = 'main'");
+$card = $pdo->fetch(PDO::FETCH_ASSOC);
+
+$conn->query("INSERT INTO expences (montant,description,category,card_id) VALUES ('$amount','$description','$type','{$card['id']}')");
 
 header("Location: expences.php");
 exit;

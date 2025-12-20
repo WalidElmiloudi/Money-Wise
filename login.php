@@ -17,7 +17,6 @@ $result->execute([':email' => $email]);
     $_SESSION['username'] =$user['name'];
     $_SESSION['verification_code'] = random_int(100000,999999);
 
-require 'vendor/autoload.php';
 require __DIR__ . '/vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -27,7 +26,7 @@ $mail = new PHPMailer(true);
 
             
      $mail->isSMTP();
-    $mail->Host       = $_ENV['SMTP_HOST'];
+     $mail->Host       = $_ENV['SMTP_HOST'];
     $mail->SMTPAuth   = true;
     $mail->Username   = $_ENV['SMTP_USER'];
     $mail->Password   = $_ENV['SMTP_PASS'];
