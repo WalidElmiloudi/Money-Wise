@@ -1,51 +1,114 @@
-# Money-Wise
+# Money Wise – Personal Finance Management App (v2)
 
-A simple personal finance / expense tracker web application built with PHP, JavaScript and Tailwind CSS — helping you manage incomes and expenses and track your financial health.
+## 📌 Project Overview
 
-## 📋 Table of Contents
+**Money Wise** is a personal finance management web application that helps users track their **income, expenses, cards, limits, and transfers** in a secure and structured way.
 
-- [About](#about)  
-- [Features](#features)   
-- [Getting Started](#getting-started)  
-  - [Prerequisites](#prerequisites)  
-  - [Installation](#installation)  
 
-## About
+---
 
-Money-Wise is a lightweight finance management tool designed for individuals who want a simple and self-hosted solution to track incomes and expenses.  
-It’s built using PHP for server-side logic, with JavaScript and Tailwind CSS for front-end — no heavy frameworks, easy to deploy.  
-The goal is to keep things minimal yet functional, making it easy to understand, customize, and run on any standard PHP-capable environment.
+## 🛠️ Tech Stack
 
-## Features
+* **Backend:** PHP (PDO)
+* **Database:** MySQL
+* **Authentication:** Email + Password (hashed)
+* **Security:** Prepared statements, password hashing, sessions
 
-- Add, edit and delete income entries  
-- Add, edit and delete expense entries  
-- View income, expense, and balance summaries  
-- Simple, clean and responsive UI with Tailwind CSS  
+---
 
-## Getting Started
+## 🔐 Features Implemented
 
-### Prerequisites
+### A. Authentication & Security (Core Only)
 
-- A web server capable of running PHP (e.g. Apache, Nginx)  
-- PHP (version 7.x or higher recommended)  
-- A MySQL (or compatible) database server  
-- Browser for accessing the web interface  
+*  User registration (email, full name, password)
+*  User login (email + password)
+*  User logout
+*  Secure session handling
+*  OTP authentication
 
-### Installation
+---
 
-```bash
-# 1. Clone the repo
-git clone https://github.com/WalidElmiloudi/Money-Wise.git
+### 💳 B. Bank Card Management
 
-# 2. Import the database schema
-mysql -u YOUR_DB_USER -p YOUR_DB_NAME < db.sql
+*  Add one or more bank cards
+*  Associate incomes with a specific card
+*  View balance per card
 
-# 3. Configure database credentials
-#    Edit `config.php` and set DB host, name, user, password.
+Each card is treated as an independent financial source, allowing accurate tracking of funds.
 
-# 4. Place project in your web-server root
-#    e.g., /var/www/html/money-wise or your local development folder
+---
+
+### 📊 C. Monthly Spending Limits (By Category)
+
+* Define a monthly limit for each expense category
+* Automatic blocking of expenses exceeding the monthly limit
+
+This helps users stay within budget and prevents overspending.
+
+---
+
+### 🔁 D. Recurring Monthly Transactions
+
+* Define recurring incomes or expenses (salary, rent, internet, etc.)
+* Automatic generation of recurring transactions at the beginning of each month
+
+This feature reduces manual input and ensures consistency in financial tracking.
+
+---
+
+### 🔄 E. Transfers Between Users
+
+*  Send money to another user via **Name or unique ID**
+*  Define a **main card** to receive transfers
+*  View transfer history (sent & received)
+
+---
+
+## 📂 Database Overview (Simplified)
+
+Main tables:
+
+* `users`
+* `cards`
+* `transactions`
+* `category_limits`
+* `incomes`
+* `expences`
+* `recurring_transactions`
+* `transactions`
+
+All database interactions use **prepared statements** to prevent SQL injection.
+
+---
+
+## 🔒 Security Practices
+
+* Passwords stored using `password_hash()`
+* Login validation with `password_verify()`
+* PDO prepared statements
+* Session-based authentication
+* Access control on protected routes
+
+---
+
+## 🚀 Future Improvements
+
+* New IP detection & email alerts
+* Spending limit email warnings
+* Advanced dashboard with charts & analytics
+
+---
+
+## 👨‍💻 Authors
+
+This project was developed as part of an academic backend development assignment using **PHP & MySQL**.
+
+---
+
+## 📄 License
+
+This project is for **educational purposes only**.
+
 
 # 5. Open in browser
 #    Visit http://localhost/money-wise (or your server URL)
