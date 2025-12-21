@@ -28,7 +28,7 @@ if(!isset($_SESSION['verification_code'])){
     <h1 class="text-2xl font-bold text-white xl:text-3xl 2xl:text-5xl">Verification</h1>
     <form class="flex flex-col items-center justify-around h-50" action="verification.php" method="post">
       <label class="text-xl xl:text-2xl 2xl:text-3xl font-bold text-white" for="verification_code">Enter The Verification Code : </label>
-    <input class="bg-gray-600 w-40 h-10 xl:h-15 xl:w-45 text-white font-bold text-2xl text-center rounded-md" type="tel" name="verification_code">
+    <input class="bg-gray-600 w-40 h-10 xl:h-15 xl:w-45 text-white font-bold text-2xl text-center rounded-md" type="text" name="verification_code" maxlength="6">
     <button class="py-1 px-2 bg-green-400 text-white text-xl xl:text-2xl font-bold rounded-md" type="submit">ENTER</button>
     </form>
   </div>

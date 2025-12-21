@@ -1,11 +1,6 @@
 <?php
 
-$host     = "localhost";
-$user     = "root";
-$password = "";
-$db       = "smart_wallet";
-
-$conn = new mysqli($host, $user, $password, $db);
+require 'config.php';
 
 $id = $_GET['id'];
 $target = $_GET['target'];

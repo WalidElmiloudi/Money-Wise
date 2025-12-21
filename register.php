@@ -1,10 +1,45 @@
 <?php
 require 'config.php';
 
-$name = htmlspecialchars(trim($_POST['firstname']))." ".htmlspecialchars(trim($_POST['lastname']));
-$email = htmlspecialchars(trim($_POST['email']));
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+$_SESSION['name'] = htmlspecialchars(trim($_POST['firstname']))." ".htmlspecialchars(trim($_POST['lastname']));
+$_SESSION['email'] = htmlspecialchars(trim($_POST['email']));
 $password = htmlspecialchars(trim($_POST['password']));
-$hashedPassword = password_hash($password,PASSWORD_DEFAULT);
+$_SESSION['hashedPassword'] = password_hash($password,PASSWORD_DEFAULT);
+$_SESSION['verification_code'] = random_int(100000,999999);
+
+require __DIR__ . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$mail = new PHPMailer(true);
+
+            
+     $mail->isSMTP();
+     $mail->Host       = $_ENV['SMTP_HOST'];
+    $mail->SMTPAuth   = true;
+    $mail->Username   = $_ENV['SMTP_USER'];
+    $mail->Password   = $_ENV['SMTP_PASS'];
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port       = $_ENV['SMTP_PORT'];                                
+
+    
+    $mail->setFrom('walidelmiloudi20@gmail.com', 'Money Wise');
+    $mail->addAddress($_SESSION['email'], $_SESSION['name']);     
+
+
+    $mail->isHTML(true);                                  
+    $mail->Subject = 'Verification';
+    $mail->Body    = '<h1>'.$_SESSION['verification_code'].'</h1>';
+    $mail->AltBody = 'this email is sent via MoneyWise';
+
+    $mail->send();
+    header("Location: verification-form.php");
+    exit;
 
 $card_holder = $name;
 

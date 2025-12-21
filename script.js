@@ -38,7 +38,12 @@ const closeRTModal = document.getElementById("closeRTModal");
 const openRTDModal = document.getElementById("openRTDModal");
 const RecurringTransactionsModal = document.getElementById("RTDisplayModal");
 const closeRTDModal = document.getElementById("closeRTDModal");
-const typeSelect = document.getElementById("typeSelect")
+const typeSelect = document.getElementById("typeSelect");
+const openChooseToModal = document.getElementById("openChooseToModal");
+const chooseToModal = document.getElementById("chooseToModal");
+const closeChooseToModal = document.getElementById("closeChooseToModal");
+const searchForm = document.getElementById("searchForm");
+const resultsContainer = document.getElementById("resultsContainer");
 
 if (openLoginModal) {
   openLoginModal.addEventListener("click", () => {
@@ -163,6 +168,17 @@ if (openRTDModal) {
   closeRTDModal.addEventListener("click", () => {
     RecurringTransactionsModal.classList.replace("flex","hidden" );
     RecurringTransactionsModal.setAttribute("aria-hidden","true");
+  })
+}
+if (openChooseToModal) {
+  openChooseToModal.addEventListener("click", () => {
+    chooseToModal.classList.replace("hidden", "flex");
+    chooseToModal.removeAttribute("aria-hidden");
+  })
+  closeChooseToModal.addEventListener("click", () => {
+    location.reload();
+    chooseToModal.classList.replace("flex","hidden" );
+    chooseToModal.setAttribute("aria-hidden","true");
   })
 }
 function deleteModal(id,table){
@@ -331,3 +347,52 @@ if(typeSelect){
 })
 }
 
+searchForm.addEventListener("submit",function(e){
+e.preventDefault();
+const formData = new FormData(this);
+
+    fetch("search.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.text())
+    .then(data => {
+        resultsContainer.innerHTML = data;
+    });
+})
+
+
+document.addEventListener("click",(e)=>{
+  if(e.target.classList.contains("chooseBtn")){
+    const userId = e.target.getAttribute("userId");
+    const userName = e.target.getAttribute("userName");
+    const newSection = document.createElement("section");
+    newSection.classList.add("z-100","w-full","h-full","fixed","bg-black/50","backdrop-filter","backdrop-blur-xs","flex","justify-center","items-center");
+    newSection.innerHTML=`
+            <div class="w-120 h-100 bg-white rounded-md flex flex-col items-center justify-center gap-5 relative">
+                <h1 class="text-5xl font-bold self-start pl-6">To : </h1>
+                <h2 class="text-3xl font-bold self-start pl-6">${userName}</h2>
+                <form class="w-[90%] flex flex-col justify-center gap-5" action="transaction_handler.php?reciever_id=${userId}&reciever_name=${userName}" method="post">
+                  <input type="hidden" name="csrf_token" value="${csrfToken}">
+                  <label class="text-4xl font-bold" for="amount">Amount :</label>
+                  <input class="text-2xl py-4 pl-2 bg-[#f3f3f3] rounded-md" type="number" name="amount" placeholder=">0.00" step="0.01">
+                  <button class="text-3xl py-4  bg-black text-white font-bold rounded-md cursor-pointer" type="submit">SEND</button>
+                </form>
+                <button id="rmBtn" class="py-1 px-2 border-2 text-2xl font-bold hover:bg-black hover:text-white absolute top-1 right-1 cursor-pointer">X</button>
+            </div>
+    `;
+    chooseToModal.after(newSection);
+    document.getElementById("rmBtn").addEventListener("click",()=>{
+      newSection.remove();
+    })
+  }
+})
+
+async function copyTextToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    console.log('Text copied to clipboard: ' + text);
+  } catch (err) {
+    console.error('Failed to copy text: ', err);
+  }
+}

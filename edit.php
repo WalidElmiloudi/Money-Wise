@@ -1,20 +1,20 @@
 <?php
 
-$host     = "localhost";
-$user     = "root";
-$password = "";
-$db       = "smart_wallet";
+require 'config.php';
 
-$conn = new mysqli($host, $user, $password, $db);
-
-$amount = $_POST['amount'];
-$type = $_POST['category'];
-$description = $_POST['description'];
+$amount = htmlspecialchars(trim($_POST['amount']));
+$type = htmlspecialchars(trim($_POST['category']));
+$description = htmlspecialchars(trim($_POST['description']));
 
 $id = $_GET['id'];
 $target = $_GET['target'];
 
-$conn->query("UPDATE $target SET montant=$amount, category='$type', description='$description' WHERE id = '$id' ");
+$pdo = $conn->prepare("UPDATE $target SET montant=:montant, category=:category, description=:description WHERE id = '$id' ");
+$pdo->execute([
+  ':montant'=> $amount,
+  ':category'=>$type,
+  ':description'=>$description
+]);
 
 header("Location: $target.php");
 exit;

@@ -2,9 +2,9 @@
 
 require 'config.php';
 
-$amount = $_POST['amount'];
-$type = $_POST['type'];
-$category = $_POST['category'];
+$amount = htmlspecialchars(trim($_POST['amount']));
+$type = htmlspecialchars(trim($_POST['type']));
+$category = htmlspecialchars(trim($_POST['category']));
 
 $pdo = $conn->prepare("INSERT INTO recurring_transactions (user_ID,amount,type,category) VALUES (:user_ID,:amount,:type,:category)");
 $pdo->execute([

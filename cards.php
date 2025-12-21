@@ -1,7 +1,7 @@
 <?php
 
     require 'config.php';
-    if (! $_SESSION['validate']) {
+    if (! $_SESSION['userID']) {
         header("Location: index.php");
         exit;
     }
@@ -51,7 +51,16 @@
     </div>
   </section>
   <main class="w-full h-full flex flex-col xl:flex-row gap-4">
-    <div class="hidden w-[20%] bg-white h-full xl:flex flex-col justify-center gap-10 pl-10">
+    <div class="hidden w-[20%] bg-white h-full xl:flex flex-col justify-center gap-8 pl-4">
+      <div class="w-full flex flex-col pl-4 gap-2">
+        <h1 class="text-3xl font-bold"><?= $_SESSION['username'] ?></h1>
+        <hr class="w-45 border-2">
+        <div class="w-full flex justify-between items-center pr-5">
+          <h1 class="text-2xl font-bold">ID : <?= $_SESSION['userID'] ?></h1>
+          <button class="py-1 px-1 border cursor-pointer" onclick="copyTextToClipboard('<?= $_SESSION['userID'] ?>')"><i class="fi fi-rs-copy-alt"></i></button>
+        </div>
+        
+      </div>
       <h1
         class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white">
         <a href="home.php">Home</a>
@@ -78,10 +87,7 @@
           </h2>
         </div>
       </div>
-      <h1
-        class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white">
-        <a href="account.php">Account</a>
-      </h1>
+      <h1 class=" text-4xl font-bold text-[#021c3b]  px-4 py-2 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="transactions.php">Transactions</a></h1>
       <hr class="w-50 border-2">
       <h1
         class="text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white flex items-center justify-center cursor-pointer">
@@ -265,18 +271,9 @@
       <div
         class="w-110 h-150 bg-[#f6f6f6] rounded-md flex flex-col items-center pt-2 gap-2 overflow-auto [scrollbar-width:none]">
         <?php
-                $pdo = $conn->query("SELECT 
-                                      c.id AS card_id,
-                                      c.statut,
-                                      c.card_number,
-                                      c.card_holder,
-                                      c.expiration_date,
-                                      c.balance,
-                                      u.id AS user_id,
-                                      u.name
+                $pdo = $conn->query("SELECT *
                                      FROM cards c 
-                                     JOIN users u 
-                                     ON c.user_id = u.id
+                                     WHERE c.user_id = {$_SESSION['userID']}
                                      ORDER BY c.statut");
                 $cards = $pdo->fetchAll(PDO::FETCH_ASSOC);
                 foreach($cards as $card){ 
@@ -319,7 +316,7 @@
             <h1 class="text-3xl font-bold self-start pl-8">Balance : <span class="text-2xl"><?php echo ($card['balance'] > 0 ? $card['balance'] : '0.00') ;?> $</span>
               
             </h1>
-            <a href="change_statut.php?cardID=<?php echo $card['card_id'] ?>"><button class="w-8 h-8 border-2  border-black rounded-full absolute top-1 right-1 cursor-pointer text-white text-xl font-bold pt-1 <?php if($card['statut']==='main') echo "bg-green-600"?>">
+            <a href="change_statut.php?cardID=<?php echo $card['id'] ?>"><button class="w-8 h-8 border-2  border-black rounded-full absolute top-1 right-1 cursor-pointer text-white text-xl font-bold pt-1 <?php if($card['statut']==='main') echo "bg-green-600"?>">
               <?php if($card['statut']==='main') echo "<i class='fi fi-br-check'></i>"?>
             </button></a>
             

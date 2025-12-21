@@ -53,6 +53,10 @@ CREATE TABLE IF NOT EXISTS recurring_transactions(
   category VARCHAR(30)
 );
 
-show tables;
-
-select sum(e.montant) from expences e left join cards c on e.card_id = c.id join users u on c.user_id = u.id where e.category = 'Housing';
+CREATE TABLE IF NOT EXISTS transactions(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  amount DECIMAL(10,2),
+  date TIMESTAMP DEFAULT (CURRENT_TIME),
+  reciever_id INT,
+  sender_id INT
+)

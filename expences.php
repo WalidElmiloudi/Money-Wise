@@ -1,7 +1,7 @@
 <?php
 
     require 'config.php';
-if(!$_SESSION['validate']){
+if(!$_SESSION['userID']){
   header("Location: index.php");
   exit;
 }
@@ -48,7 +48,16 @@ if(!$_SESSION['validate']){
     </div>
   </section>
   <main id="expences" class="w-full h-full flex flex-col xl:flex-row  gap-4">
-    <div class="hidden w-[30%] bg-white h-full xl:flex flex-col justify-center gap-10 pl-10">
+    <div class="hidden w-[30%] bg-white h-full xl:flex flex-col justify-center gap-8 pl-4">
+      <div class="w-full flex flex-col pl-4 gap-2">
+        <h1 class="text-3xl font-bold"><?= $_SESSION['username'] ?></h1>
+        <hr class="w-45 border-2">
+        <div class="w-full flex justify-between items-center pr-5">
+          <h1 class="text-2xl font-bold">ID : <?= $_SESSION['userID'] ?></h1>
+          <button class="py-1 px-1 border cursor-pointer" onclick="copyTextToClipboard('<?= $_SESSION['userID'] ?>')"><i class="fi fi-rs-copy-alt"></i></button>
+        </div>
+        
+      </div>
       <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="home.php">Home</a></h1>
         <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="dashboard.php">Dashboard</a></h1>
         <div class="w-full">
@@ -69,7 +78,7 @@ if(!$_SESSION['validate']){
           </h2>
         </div>
       </div>
-      <h1 class=" text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="account.php">Account</a></h1>
+      <h1 class=" text-4xl font-bold text-[#021c3b]  px-4 py-2 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white"><a href="transactions.php">Transactions</a></h1>
  <hr class="w-50 border-2">
       <h1 class="text-4xl font-bold text-[#021c3b] py-2 px-4 w-fit hover:bg-gray-500 hover:scale-110 hover:text-gray-800 rounded-full ease-in-out duration-150 active:bg-gray-800 active:text-white flex items-center justify-center cursor-pointer"><i class="fi fi-rs-sign-out-alt"></i><a href="logout.php">LOGOUT</a></h1>    </div>
     <div class ="w-full h-full bg-[#f2f4f7] flex justify-center items-center">
