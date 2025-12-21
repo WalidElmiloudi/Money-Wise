@@ -195,7 +195,9 @@
 
 
         </div>
-        <div class="bg-white rounded-md col-span-2 row-span-2">history</div>
+        <div class="bg-white rounded-md col-span-2 row-span-2 flex justify-center items-center">
+          <h1 class="text-2xl font-bold text-[#021c3b] 2xl:text-4xl animate-pulse">Available Soon</h1>
+        </div>
         <div class="bg-[#f5f5f5] rounded-md col-span-4 row-span-1 grid grid-cols-3 gap-5 p-5">
           <div class="border-4 bg-white border-green-700 col-span-1 rounded-md flex flex-col items-center justify-center gap-8">
             <h1 class="text-4xl font-bold self-start pl-2">Total Incomes :</h1>

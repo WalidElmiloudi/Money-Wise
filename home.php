@@ -69,16 +69,15 @@ if(!$_SESSION['userID']){
     </div>
     <div
       class="xl:order-4 row-span-3 rounded-md bg-white shadow-md flex justify-center items-center xl:row-span-5 xl:col-span-4 2xl:col-span-7">
-      <div class="w-80 h-60 xl:w-[90%] xl:h-[85%] bg-slate-50">
-        <canvas class="w-full h-full">
-
-        </canvas>
+      <div class="w-80 h-60 xl:w-[90%] xl:h-[85%] bg-slate-50 flex justify-center items-center">
+        <h1 class="text-2xl font-bold text-[#021c3b] 2xl:text-9xl animate-pulse">Available Soon</h1>
       </div>
     </div>
     <div
       class="xl:order-3 row-span-4 rounded-md bg-white shadow-md flex flex-col justify-center items-center gap-5 xl:row-span-8 xl:col-span-2 2xl:col-span-3">
       <h1 class="text-2xl font-bold text-[#021c3b] 2xl:text-4xl">History</h1>
-      <div class="w-[80%] h-[80%] xl:w-[85%] bg-slate-50">
+      <div class="w-[80%] h-[80%] xl:w-[85%] bg-slate-50 flex justify-center items-center">
+          <h1 class="text-2xl font-bold text-[#021c3b] 2xl:text-4xl animate-pulse">Available Soon</h1>
       </div>
     </div>
   </section>
