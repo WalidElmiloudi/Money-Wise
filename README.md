@@ -109,6 +109,3 @@ This project was developed as part of an academic backend development assignment
 
 This project is for **educational purposes only**.
 
-
-# 5. Open in browser
-#    Visit http://localhost/money-wise (or your server URL)
