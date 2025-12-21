@@ -1,7 +1,7 @@
 <?php
 require 'config.php';
 
-$code = $_POST['verification_code'];
+$code = htmlspecialchars(trim($_POST['verification_code']));
 
 if($code == $_SESSION['verification_code']){
   $card_holder = $_SESSION['name'];
@@ -48,7 +48,6 @@ session_unset();
 header("Location: index.php");
 exit;
 } else{
-  $_SESSION['validate'] = false;
   header("Location: verification-form.php");
     exit;
 }
