@@ -350,7 +350,7 @@
           <option value="Expences">Expences</option>
         </select>
         <div id="newDiv">
-
+                  
         </div>
         <button class="text-2xl font-bold py-2 bg-black text-white rounded-md cursor-pointer" type="submit">ADD</button>
       </form>

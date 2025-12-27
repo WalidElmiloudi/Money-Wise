@@ -60,3 +60,11 @@ CREATE TABLE IF NOT EXISTS transactions(
   reciever_id INT,
   sender_id INT
 )
+
+SELECT SUM(montant) FROM incomes i  JOIN cards c ON i.card_id = c.id WHERE c.user_id = 1 AND MONTH(date) = 12 AND YEAR(date) = YEAR(CURDATE());
+
+SELECT * FROM cards c where c.user_id = 1;
+
+UPDATE cards SET statut = 'main' WHERE statut = 'secondary' AND cards.user_id = 1 LIMIT 1;
+
+SELECT category,COUNT(*) FROM incomes GROUP BY category;

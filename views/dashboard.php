@@ -152,7 +152,7 @@ $monthlyIncomes = [];
 $monthlyExpences = [];
 
 for ($m = 1; $m <= 12; $m++) {
-    $resIncome = $conn->query("SELECT SUM(montant) AS total FROM incomes i LEFT JOIN cards c ON i.card_id = c.id WHERE c.user_id = {$_SESSION['userID']}  AND MONTH(date)=$m AND YEAR(date)=YEAR(CURDATE())");
+    $resIncome = $conn->query("SELECT SUM(montant) FROM incomes i  JOIN cards c ON i.card_id = c.id WHERE c.user_id = {$_SESSION['userID']} AND MONTH(date) = $m AND YEAR(date) = YEAR(CURDATE())");
     $income = $resIncome->fetch(PDO::FETCH_ASSOC)['total'] ?? 0;
     $monthlyIncomes[] = $income;
 

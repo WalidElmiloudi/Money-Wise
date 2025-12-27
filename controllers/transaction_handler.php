@@ -13,9 +13,9 @@ $reciever_name = $_GET['reciever_name'];
 $userID = $_SESSION['userID'];
 $amount = htmlspecialchars(trim($_POST['amount']));
 
-if($amount <= 0){
+if($amount <= 0 || $amount > $_SESSION['balance'] ){
  $_SESSION['message'][] = [
-    'text'  => 'Amount must be over zero',
+    'text'  => 'Amount must be over zero or over your balance',
     'color' => 'bg-red-500'
 ];
   header("Location: transactions.php");
